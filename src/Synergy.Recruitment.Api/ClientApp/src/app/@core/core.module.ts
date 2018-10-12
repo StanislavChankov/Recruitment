@@ -7,10 +7,10 @@ import { of as observableOf } from 'rxjs';
 import { throwIfAlreadyLoaded } from './module-import-guard';
 import { DataModule } from './data/data.module';
 import { AnalyticsService } from './utils/analytics.service';
-import { ErrorBaseService } from './abstract/error-base.service';
-import { CandidateBaseService } from './abstract/candidate-base.service';
+// import { ErrorBaseService } from './abstract/error-base.service';
+// import { CandidateBaseService } from './abstract/candidate-base.service';
 
-import { CandidateService } from '../@core/services/candidate.service';
+// import { CandidateService } from '../@core/services/candidate.service';
 import { ErrorService } from '../@core/services/error.service';
 
 const socialLinks = [

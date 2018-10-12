@@ -8,7 +8,7 @@ import 'rxjs/add/operator/catch';
 import { Candidate } from '../../@shared/data-models/candidates/Candidate';
 import { CandidateBaseService } from '../abstract/candidate-base.service';
 import { apiUrls } from '../../../environments/environment';
-import { ErrorBaseService } from '../abstract/error-base.service';
+// import { ErrorBaseService } from '../abstract/error-base.service';
 import { ErrorService } from '../services/error.service';
 
 @Injectable()
@@ -27,11 +27,6 @@ export class CandidateService implements CandidateBaseService {
 
         return candidates;
        })
-      .catch(this.handleError);
-  }
-
-  public handleError (error: Response | any): Observable<never> {
-    console.error('ApiService::handleError', error);
-    return Observable.throw(error);
+      .catch(this.errorService.handleError);
   }
 }
