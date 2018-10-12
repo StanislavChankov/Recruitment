@@ -17,41 +17,6 @@ interface CardSettings {
 })
 export class DashboardComponent implements OnDestroy {
 
-  vamps = [
-    { name: "Bad Vamp" },
-    { name: "Petrovitch the Slain" },
-    { name: "Bob of the Everglades" },
-    { name: "The Optimistic Reaper" }
-  ];
-
-  vamps2 = [
-    { name: "Dracula" },
-    { name: "Kurz" },
-    { name: "Vladislav" },
-    { name: "Deacon" }
-  ];
-
-  vamps3 = [
-    { name: "Dracula" },
-    { name: "Kurz" },
-    { name: "Vladislav" },
-    { name: "Deacon" }
-  ];
-
-  vamps4 = [
-    { name: "Dracula" },
-    { name: "Kurz" },
-    { name: "Vladislav" },
-    { name: "Deacon" }
-  ];
-
-  vamps5 = [
-    { name: "Dracula" },
-    { name: "Kurz" },
-    { name: "Vladislav" },
-    { name: "Deacon" }
-  ];
-
   private alive = true;
 
   lightCard: CardSettings = {
@@ -147,12 +112,12 @@ export class DashboardComponent implements OnDestroy {
     private themeService: NbThemeService,
     private dragulaService: DragulaService) {
 
-      this.dragulaService.createGroup("Candidates", {
+      this.dragulaService.createGroup('Candidates', {
         // ...
       });
 
-      this.dragulaService.dropModel("Candidates").subscribe(args => {
-        console.log(args);
+      this.dragulaService.dropModel('Candidates').subscribe(args => {
+        // console.log(args);
       });
 
     this.themeService.getJsTheme()
