@@ -1,4 +1,4 @@
-<div class="row">
+<!-- <div class="row">
   <div class="col-xxxl-3 col-md-6" *ngFor="let statusCard of statusCards">
     <ngx-status-card [title]="statusCard.title"
                      [type]="statusCard.type">
@@ -39,5 +39,42 @@
 
   <div class="col-xxxl-6 col-xxl-12 col-md-7">
     <ngx-security-cameras></ngx-security-cameras>
+  </div>
+</div> -->
+
+<div class="row">
+  <div class="container" dragula="Candidates" [(dragulaModel)]="candidates">
+      <ngx-candidate-status 
+        *ngFor="let candidate of candidates" 
+        [candidate]=candidate>
+      </ngx-candidate-status>
+  </div>
+
+  <div class="container" dragula="Candidates" [(dragulaModel)]="candidates1">
+      <ngx-candidate-status 
+        *ngFor="let candidate of candidates1" 
+        [candidate]=candidate>
+      </ngx-candidate-status>
+  </div>
+
+  <div class="container" dragula="Candidates" [(dragulaModel)]="candidates2">
+      <ngx-candidate-status 
+        *ngFor="let candidate of candidates2" 
+        [candidate]=candidate>
+      </ngx-candidate-status>
+  </div>
+
+  <div class="container" dragula="Candidates" [(dragulaModel)]="candidates3">
+      <ngx-candidate-status 
+        *ngFor="let candidate of candidates3" 
+        [candidate]=candidate>
+      </ngx-candidate-status>
+  </div>
+
+  <div class="container" dragula="Candidates" [(dragulaModel)]="candidates4">
+      <ngx-candidate-status 
+        *ngFor="let candidate of candidates4" 
+        [candidate]=candidate>
+      </ngx-candidate-status>
   </div>
 </div>

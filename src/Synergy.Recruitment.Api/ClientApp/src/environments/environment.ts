@@ -10,4 +10,14 @@
 
 export const environment = {
   production: false,
+  baseUrl: 'http://localhost:5000/api',
+};
+
+export const apiUrls = {
+  technology: {
+    getAll: environment.baseUrl + '/technology',
+  },
+  candidate: {
+    getAll: environment.baseUrl + '/candidate',
+  },
 };

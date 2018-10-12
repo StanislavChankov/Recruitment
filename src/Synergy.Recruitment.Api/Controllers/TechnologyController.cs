@@ -1,8 +1,14 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
+using Synergy.Recruitment.Business.Factories;
 using Synergy.Recruitment.Core.Services;
+using Synergy.Recruitment.Data.Models;
+using Synergy.Recruitment.Rest.Models.Technology;
 
 namespace Synergy.Recruitment.Api.Controllers
 {
@@ -17,11 +23,14 @@ namespace Synergy.Recruitment.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get()
+        [ProducesResponseType(typeof(IEnumerable<TechnologyResponse>), StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetAsync()
         {
-            var technologies = await _technologyService.GetAllAsync();
+            IEnumerable<Technology> technologies = await _technologyService.GetAllAsync();
 
-            return Ok(technologies);
+            IEnumerable<TechnologyResponse> response = technologies.Select(TechnologyFactory.GetTechnologyResponse);
+
+            return Ok(response);
         }
     }
 }

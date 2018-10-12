@@ -7,6 +7,11 @@ import { of as observableOf } from 'rxjs';
 import { throwIfAlreadyLoaded } from './module-import-guard';
 import { DataModule } from './data/data.module';
 import { AnalyticsService } from './utils/analytics.service';
+import { ErrorBaseService } from './abstract/error-base.service';
+import { CandidateBaseService } from './abstract/candidate-base.service';
+
+import { CandidateService } from '../@core/services/candidate.service';
+import { ErrorService } from '../@core/services/error.service';
 
 const socialLinks = [
   {
@@ -66,10 +71,7 @@ export const NB_CORE_PROVIDERS = [
       },
     },
   }).providers,
-
-  {
-    provide: NbRoleProvider, useClass: NbSimpleRoleProvider,
-  },
+  { provide: NbRoleProvider, useClass: NbSimpleRoleProvider },
   AnalyticsService,
 ];
 
@@ -92,6 +94,9 @@ export class CoreModule {
       ngModule: CoreModule,
       providers: [
         ...NB_CORE_PROVIDERS,
+        ErrorService,
+        // { provide: ErrorBaseService, useClass: ErrorService },
+        // { provide: CandidateBaseService, useClass: CandidateService },
       ],
     };
   }

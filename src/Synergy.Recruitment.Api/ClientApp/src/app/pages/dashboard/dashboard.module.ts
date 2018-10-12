@@ -21,15 +21,11 @@ import { PlayerComponent } from './rooms/player/player.component';
 import { TrafficComponent } from './traffic/traffic.component';
 import { TrafficChartComponent } from './traffic/traffic-chart.component';
 
+import { DragulaModule } from 'ng2-dragula';
+import { CandidateStatusComponent } from './candidate-status/candidate-status.component';
 
-@NgModule({
-  imports: [
-    ThemeModule,
-    NgxEchartsModule,
-  ],
-  declarations: [
-    DashboardComponent,
-    StatusCardComponent,
+const ngxComponents = [
+  StatusCardComponent,
     TemperatureDraggerComponent,
     ContactsComponent,
     RoomSelectorComponent,
@@ -45,6 +41,18 @@ import { TrafficChartComponent } from './traffic/traffic-chart.component';
     SolarComponent,
     TrafficComponent,
     TrafficChartComponent,
+];
+
+@NgModule({
+  imports: [
+    ThemeModule,
+    NgxEchartsModule,
+    DragulaModule.forRoot(),
+  ],
+  declarations: [
+    ...ngxComponents,
+    DashboardComponent,
+    CandidateStatusComponent,
   ],
 })
 export class DashboardModule { }

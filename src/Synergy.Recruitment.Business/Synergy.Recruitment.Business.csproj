@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Synergy.Recruitment.Data\Synergy.Recruitment.Data.csproj" />
+    <ProjectReference Include="..\Synergy.Recruitment.Rest.Models\Synergy.Recruitment.Rest.Models.csproj" />
   </ItemGroup>
 
 </Project>

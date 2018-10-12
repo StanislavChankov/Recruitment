@@ -5,4 +5,5 @@
  */
 export const environment = {
   production: true,
+  baseUrl: 'http://amazing94-001-site1.gtempurl.com/api',
 };
