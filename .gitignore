@@ -1,7 +1,7 @@
-/src/Synergy.Recruitment.Api/bin
-/src/Synergy.Recruitment.Api/obj
 
 /src/Synergy.Recruitment.*/bin
 /src/Synergy.Recruitment.*/obj
+
+.vs
 
 

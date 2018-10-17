@@ -1,8 +1,9 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
 import { takeWhile } from 'rxjs/operators/takeWhile' ;
 import { DragulaService } from 'ng2-dragula';
 import { Candidate } from '../../@shared/data-models/candidates/Candidate';
+import { CandidateService } from '../../@core/services/candidate.service';
 
 interface CardSettings {
   title: string;
@@ -15,7 +16,7 @@ interface CardSettings {
   styleUrls: ['./dashboard.component.scss'],
   templateUrl: './dashboard.component.html',
 })
-export class DashboardComponent implements OnDestroy {
+export class DashboardComponent implements OnDestroy, OnInit {
 
   private alive = true;
 
@@ -76,41 +77,19 @@ export class DashboardComponent implements OnDestroy {
     ],
   };
 
-  candidates: Array<Candidate> = [
-    { firstName: 'Marcia', lastName: 'Cantu', position: '.NET'  } as Candidate,
-    { firstName: 'Ryder', lastName: 'Nicholson', position: 'Java'  } as Candidate,
-    { firstName: 'Eloisa', lastName: 'Wise', position: 'QA'  } as Candidate,
-    { firstName: 'Johnathon', lastName: 'Fountain', position: '.NET'  } as Candidate,
-  ];
+  candidatedCandidates: Array<Candidate>;
 
-  candidates1: Array<Candidate> = [
-    { firstName: 'Lyra', lastName: 'Thomas', position: 'BA'  } as Candidate,
-    { firstName: 'Lacy', lastName: 'Reilly', position: 'DBA'  } as Candidate,
-    { firstName: 'Tiya', lastName: 'Atkins', position: 'BI'  } as Candidate,
-  ];
+  approvedForInterviewCandidates: Array<Candidate>;
 
-  candidates2: Array<Candidate> = [
-    { firstName: 'Harris', lastName: 'Weir', position: 'Finance'  } as Candidate,
-    { firstName: 'Cassia', lastName: 'Livingston', position: 'Accountant'  } as Candidate,
-    { firstName: 'Tehya', lastName: 'Brooks', position: 'Consultant'  } as Candidate,
-  ];
+  interviewScheduledCandidates: Array<Candidate>;
 
-  candidates3: Array<Candidate> = [
-    { firstName: 'Herbie', lastName: 'Major', position: '.NET'  } as Candidate,
-    { firstName: 'Morwenna', lastName: 'Mcdonald', position: 'BA'  } as Candidate,
-    { firstName: 'Mariyah', lastName: 'Guerrero', position: 'DBA'  } as Candidate,
-    { firstName: 'Caden', lastName: 'Turnbull', position: 'Accountant'  } as Candidate,
-  ];
-
-  candidates4: Array<Candidate> = [
-    { firstName: 'Fearne', lastName: 'Cox', position: '.NET'  } as Candidate,
-    { firstName: 'Zoey', lastName: 'Ashley', position: 'Finance'  } as Candidate,
-    { firstName: 'Luqman', lastName: 'Davila', position: 'Lead'  } as Candidate,
-  ];
+  taskAssignedCandidates: Array<Candidate>;
+  approvedCandidates: Array<Candidate>;
 
   constructor(
     private themeService: NbThemeService,
-    private dragulaService: DragulaService) {
+    private dragulaService: DragulaService,
+    private candidateService: CandidateService) {
 
       this.dragulaService.createGroup('Candidates', {
         // ...
@@ -129,5 +108,17 @@ export class DashboardComponent implements OnDestroy {
 
   ngOnDestroy() {
     this.alive = false;
+  }
+
+  ngOnInit(): void {
+    this.candidateService
+      .getCandidatesStatus()
+      .subscribe(candidates => {
+        this.candidatedCandidates = candidates.filter(c => c.id < 4);
+        this.approvedForInterviewCandidates = candidates.filter(c => c.id >= 4 && c.id < 8);
+        this.interviewScheduledCandidates = candidates.filter(c => c.id >= 8 && c.id < 12);
+        this.taskAssignedCandidates = candidates.filter(c => c.id >= 12 && c.id < 15);
+        this.approvedCandidates = candidates.filter(c => c.id >= 15 && c.id < 18);
+      });
   }
 }

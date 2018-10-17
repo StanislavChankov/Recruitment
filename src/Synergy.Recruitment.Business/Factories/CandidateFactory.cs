@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+
 using Synergy.Recruitment.Data.Models;
 using Synergy.Recruitment.Rest.Models.Candidate;
 
@@ -19,7 +21,7 @@ namespace Synergy.Recruitment.Business.Factories
                     Id = technology.Id,
                     FirstName = technology.FirstName,
                     LastName = technology.LastName,
-                    Position = technology.PositionId.ToString(),
+                    Position = MockFactory.GetPositions().FirstOrDefault(p => p.Id == technology.PositionId).Name,
                     UpdatedOn = technology.UpdatedOn,
                 };
     }

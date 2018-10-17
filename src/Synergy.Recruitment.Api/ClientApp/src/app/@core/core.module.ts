@@ -12,6 +12,8 @@ import { AnalyticsService } from './utils/analytics.service';
 
 // import { CandidateService } from '../@core/services/candidate.service';
 import { ErrorService } from '../@core/services/error.service';
+import { CandidateService } from './services/candidate.service';
+import { HttpModule } from '@angular/http';
 
 const socialLinks = [
   {
@@ -78,6 +80,7 @@ export const NB_CORE_PROVIDERS = [
 @NgModule({
   imports: [
     CommonModule,
+    HttpModule,
   ],
   exports: [
     NbAuthModule,
@@ -95,6 +98,8 @@ export class CoreModule {
       providers: [
         ...NB_CORE_PROVIDERS,
         ErrorService,
+        CandidateService,
+        // TODO: FIX it to work with abstract providers.
         // { provide: ErrorBaseService, useClass: ErrorService },
         // { provide: CandidateBaseService, useClass: CandidateService },
       ],

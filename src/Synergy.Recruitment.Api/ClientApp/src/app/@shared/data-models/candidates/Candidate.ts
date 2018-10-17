@@ -4,6 +4,14 @@
  * @interface Candidate
  */
 export interface Candidate {
+
+    /**
+     * The candidate's unique identifier.
+     * @type {number}
+     * @memberof Candidate
+     */
+    id: number;
+
     /**
      * The first name of the Candidate.
      * @type {string}

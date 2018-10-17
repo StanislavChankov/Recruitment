@@ -26,10 +26,17 @@ namespace Synergy.Recruitment.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services
+                .AddCors(options => options.AddPolicy("AllowAll", p =>
+                                            p.AllowAnyOrigin()
+                                            .AllowAnyMethod()
+                                            .AllowAnyHeader()));
+
             services.AddMvc();
 
             services.AddScoped<ITechnologyRepository, TechnologyRepository>();
             services.AddScoped<ITechnologyService, TechnologyService>();
+            services.AddScoped<ICandidateService, CandidateService>();
 
             services
                 .AddDbContextPool<ApplicationDbContext>(builder =>
@@ -37,10 +44,7 @@ namespace Synergy.Recruitment.Api
                     builder.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
                 });
 
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new Info { Title = "recruitment api", Version = "v1" });
-            });
+            services.AddSwaggerGen(c => c.SwaggerDoc("v1", new Info { Title = "recruitment api", Version = "v1" }));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,13 +55,12 @@ namespace Synergy.Recruitment.Api
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors("AllowAll");
+
             app.UseMvc();
 
             app.UseSwagger();
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Recruitment API V1");
-            });
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Recruitment API V1"));
         }
     }
 }
