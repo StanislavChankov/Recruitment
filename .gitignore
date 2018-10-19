@@ -1,7 +1,5 @@
-
-/src/Synergy.Recruitment.*/bin
-/src/Synergy.Recruitment.*/obj
-
-.vs
+.vs/
+bin/
+obj/
 
 
