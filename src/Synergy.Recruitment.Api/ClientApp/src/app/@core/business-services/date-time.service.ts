@@ -11,9 +11,6 @@ export class DateTimeService {
    * @memberof DateTimeService
    */
   public getTimeBetweenDates(date1, date2) {
-    // Get 1 day in milliseconds
-    const one_day = 1000 * 60 * 60 * 24;
-
     // Convert both dates to milliseconds
     const date1_ms = date1.getTime();
     const date2_ms = date2.getTime();

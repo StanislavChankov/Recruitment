@@ -11,7 +11,7 @@ describe('FilterNavigationComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FilterNavigationComponent ]
+      declarations: [ FilterNavigationComponent ],
     })
     .compileComponents();
   }));
