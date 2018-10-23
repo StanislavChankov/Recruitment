@@ -1,7 +1,7 @@
 @import '../../../@theme/styles/themes';
 
 @include nb-install-component() {
-    #container {
+    nb-card {
         height: nb-theme(card-height-xxsmall);
     }
 }

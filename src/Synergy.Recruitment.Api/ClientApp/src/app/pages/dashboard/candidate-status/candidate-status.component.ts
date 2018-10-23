@@ -31,14 +31,12 @@ export class CandidateStatusComponent implements OnInit {
     this.initTimerUpdate();
   }
 
-  private getDraggingClass(): string {
+  public getDraggingClass(): string {
     const parentElement: HTMLElement = this.elRef.nativeElement;
     const hasDragClass = parentElement.classList.contains('gu-transit');
 
     return hasDragClass ? 'gu-transit' : '';
   }
-
-  public test: string;
 
   private initTimerUpdate(): void {
     this.timer = Observable.timer(0, 1000);

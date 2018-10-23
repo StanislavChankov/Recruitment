@@ -24,13 +24,10 @@
     flex: 1;
     padding: 10px;
     div {
-      cursor: initial !important;
+      cursor: !important;
     }
   }
 
-  .wrapper {
-    overflow-x: scroll;
-  }
   // .handle {
   //   padding: 0 5px;
   //   margin-right: 5px;
