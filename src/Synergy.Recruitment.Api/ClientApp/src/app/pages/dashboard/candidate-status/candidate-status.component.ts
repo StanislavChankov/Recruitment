@@ -38,6 +38,8 @@ export class CandidateStatusComponent implements OnInit {
     return hasDragClass ? 'gu-transit' : '';
   }
 
+  public test: string;
+
   private initTimerUpdate(): void {
     this.timer = Observable.timer(0, 1000);
 
