@@ -1,11 +1,13 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
-  <ItemGroup>
+  <ItemGroup Label="Project References">
+    <ProjectReference Include="..\Synergy.Recruitment.Business.Models\Synergy.Recruitment.Business.Models.csproj" />
     <ProjectReference Include="..\Synergy.Recruitment.Data.Models\Synergy.Recruitment.Data.Models.csproj" />
+    <ProjectReference Include="..\Synergy.Recruitment.Resources\Synergy.Recruitment.Resources.csproj" />
   </ItemGroup>
 
 </Project>

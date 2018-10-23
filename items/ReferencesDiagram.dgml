@@ -1,29 +1,33 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <DirectedGraph xmlns="http://schemas.microsoft.com/vs/2009/dgml">
   <Nodes>
-    <Node Id="API" Bounds="-180.574561631833,14.4476108869858,50,25.96" Label="Api" UseManualLocation="True" />
-    <Node Id="Business.Models" Bounds="-199.825185259183,-278.104740600586,106.673333333333,25.96" UseManualLocation="True" />
-    <Node Id="Core" Bounds="-182.842283480332,-162.06492482384,50,25.96" Label="Core" UseManualLocation="True" />
-    <Node Id="Data" Bounds="-259.485401087742,-74.7606995562207,50,25.96" UseManualLocation="True" />
-    <Node Id="Data.Common" Bounds="-335.583550517702,-161.099941290279,96.2466666666667,25.96" UseManualLocation="True" />
-    <Node Id="Domain.Models" Bounds="-333.274611877106,-277.809246520996,86.4433333333332,25.96" Label="Data.Models" UseManualLocation="True" />
-    <Node Id="Presentation.Models" Bounds="62.8908011716449,-274.723327160802,84.0133333333333,25.96" Label="Rest.Models" UseManualLocation="True" />
-    <Node Id="Resources" Bounds="-46.1681940876127,-281.90621986101,73.1033333333333,25.96" UseManualLocation="True" />
-    <Node Id="Services" Bounds="-102.316599148437,-77.0101917825049,64.9233333333333,25.96" Label="Business" UseManualLocation="True" />
-    <Node Id="Unit.Tests" Bounds="-72.818273288058,143.070951398948,70.2533333333333,25.96" UseManualLocation="True" />
+    <Node Id="API" Bounds="-166.427536010742,-39.4242282592773,50,25.96" Label="Api" UseManualLocation="True" />
+    <Node Id="Admin" Bounds="-25.1092529296875,-38.9533401214599,50,25.96" Label="Web" UseManualLocation="True" />
+    <Node Id="Api.Client" Bounds="61.459838663737,-96.91344012146,70.6766666666667,25.96" Label="Api.Client" UseManualLocation="True" />
+    <Node Id="Business.Models" Bounds="-88.4401830376518,-278.104740600586,106.673333333333,25.96" UseManualLocation="True" />
+    <Node Id="Core" Bounds="-166.729995727539,-159.691058529663,50,25.96" Label="Core" UseManualLocation="True" />
+    <Node Id="Data" Bounds="-241.677040100098,-95.3843282592774,50,25.96" UseManualLocation="True" />
+    <Node Id="Data.Common" Bounds="-314.010193674723,-158.511814575195,96.2466666666667,25.96" UseManualLocation="True" />
+    <Node Id="Domain.Models" Bounds="-308.653521560033,-276.809246520996,86.4433333333332,25.96" Label="Data.Models" UseManualLocation="True" />
+    <Node Id="Presentation.Models" Bounds="48.2331502956812,-277.548618774414,128.046666666667,25.96" UseManualLocation="True" />
+    <Node Id="Resources" Bounds="-191.543516370985,-276.769337158203,73.1033333333333,25.96" Label="Resources" UseManualLocation="True" />
+    <Node Id="Services" Bounds="-116.677049942017,-95.7309585296631,62.39,25.9600000000001" UseManualLocation="True" />
+    <Node Id="Unit.Tests" Bounds="-111.154017561259,33.1211048149608,70.2533333333333,25.96" UseManualLocation="True" />
   </Nodes>
   <Links>
-    <Link Source="API" Target="Data" Bounds="-217.04072686014,-42.0595783864491,49.9844740802441,56.5071868764394" />
-    <Link Source="API" Target="Services" Bounds="-143.408936073411,-44.4835680415803,55.2337599210423,58.9311765315705" />
-    <Link Source="Core" Target="Business.Models" Bounds="-156.572274445888,-243.187513948586,7.93733050336186,81.1225835286646" />
-    <Link Source="Core" Target="Domain.Models" Bounds="-268.454688377471,-245.920957902443,95.7858037505792,83.8560274825214" />
-    <Link Source="Core" Target="Resources" Bounds="-141.787967129754,-250.287754951477,109.118434686083,88.2228245315548" />
-    <Link Source="Data" Target="Core" Bounds="-223.090456813013,-129.341421400953,47.9156283358966,54.5807169026616" />
-    <Link Source="Data" Target="Data.Common" Bounds="-274.789379996504,-127.468795507851,32.3398830603196,52.70809100956" />
-    <Link Source="Data.Common" Target="Domain.Models" Bounds="-289.564712073506,-242.85145891317,1.81613680100281,81.7515248311391" />
-    <Link Source="Services" Target="Core" Bounds="-137.943860904358,-129.849720347428,54.6613903316995,52.8395270185706" />
-    <Link Source="Services" Target="Presentation.Models" Bounds="-58.382318533393,-242.019863748991,145.846839891345,165.009670420133" />
-    <Link Source="Unit.Tests" Target="API" Bounds="-137.597507791641,47.0425553329261,88.0097676737922,96.0283937637536" />
+    <Link Source="API" Target="Data" Bounds="-192.000928293554,-64.0536733145531,33.1191961130435,24.6294450552757" />
+    <Link Source="API" Target="Services" Bounds="-128.530810912619,-63.3865494059693,23.8085878015041,23.9623212336671" />
+    <Link Source="Admin" Target="Api.Client" Bounds="21.5928906685426,-66.3337844756595,45.7792263283906,27.3804453948489" />
+    <Link Source="Api.Client" Target="Presentation.Models" Bounds="97.9089682231731,-242.621394662582,12.4693258165513,145.70795731517" />
+    <Link Source="Core" Target="Business.Models" Bounds="-130.042057944957,-245.456614808783,77.2282337069215,85.7655552384707" />
+    <Link Source="Core" Target="Domain.Models" Bounds="-245.186684897734,-244.661585879044,89.7470351638802,84.9705263087314" />
+    <Link Source="Core" Target="Presentation.Models" Bounds="-117.102530157004,-247.800328867659,193.222859238878,89.661365752337" />
+    <Link Source="Core" Target="Resources" Bounds="-152.508567784024,-241.866526170201,9.3082848486946,82.1754665998885" />
+    <Link Source="Data" Target="Data.Common" Bounds="-250.235337796197,-125.453679175245,23.4399872905344,30.069351782667" />
+    <Link Source="Data.Common" Target="Domain.Models" Bounds="-265.836936838761,-241.849320727814,0.32055322139928,83.3375061526191" />
+    <Link Source="Services" Target="Core" Bounds="-124.371642388337,-126.972702266171,27.4746898345632,31.2417447771576" />
+    <Link Source="Unit.Tests" Target="API" Bounds="-123.699715366247,-6.7795950315395,35.970792959964,39.9006998465003" />
+    <Link Source="Unit.Tests" Target="Admin" Bounds="-62.3551411858431,-6.79675206865638,42.0466340860287,39.9178568836172" />
   </Links>
   <Properties>
     <Property Id="Bounds" DataType="System.Windows.Rect" />

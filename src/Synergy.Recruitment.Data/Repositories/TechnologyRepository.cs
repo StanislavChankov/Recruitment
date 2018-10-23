@@ -11,7 +11,7 @@ namespace Synergy.Recruitment.Data.Repositories
     /// <summary>
     /// The default implementation of <see cref="ITechnologyRepository"/>.
     /// </summary>
-    /// <seealso cref="Synergy.Recruitment.Data.Common.EFCoreRepository{Technology}" />
+    /// <seealso cref="Synergy.Recruitment.Data.Common.Abstract.EFCoreRepository{Technology}" />
     /// <seealso cref="Synergy.Recruitment.Core.Repositories.ITechnologyRepository" />
     public class TechnologyRepository : EFCoreRepository<Technology>, ITechnologyRepository
     {

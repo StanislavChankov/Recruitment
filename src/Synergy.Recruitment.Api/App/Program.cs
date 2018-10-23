@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
-namespace Synergy.Recruitment.Api
+namespace Synergy.Recruitment.Api.App
 {
     public class Program
     {

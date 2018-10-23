@@ -4,11 +4,11 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
-  <ItemGroup>
+  <ItemGroup Label="NuGet Packages">
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.0" />
   </ItemGroup>
 
-  <ItemGroup>
+  <ItemGroup Label="Project References">
     <ProjectReference Include="..\Synergy.Recruitment.Core\Synergy.Recruitment.Core.csproj" />
     <ProjectReference Include="..\Synergy.Recruitment.Data.Common\Synergy.Recruitment.Data.Common.csproj" />
   </ItemGroup>

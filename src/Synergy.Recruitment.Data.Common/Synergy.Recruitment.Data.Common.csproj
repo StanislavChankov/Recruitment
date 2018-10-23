@@ -7,7 +7,7 @@
     <PackageReference Include="System.ComponentModel.Annotations" Version="4.5.0" />
   </ItemGroup>
   
-  <ItemGroup>
+  <ItemGroup Label="Project References">
     <ProjectReference Include="..\Synergy.Recruitment.Data.Models\Synergy.Recruitment.Data.Models.csproj" />
   </ItemGroup>
   
