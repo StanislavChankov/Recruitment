@@ -3,18 +3,16 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
 
-  <ItemGroup Label="NuGet Packages">
-    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
+  <ItemGroup Label="Package References">    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="3.0.0" />
     <PackageReference Include="LightInject.Microsoft.DependencyInjection" Version="2.0.5" />
   </ItemGroup>
 
-  <ItemGroup>
+  <ItemGroup Label="Tool References">
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
   </ItemGroup>
 
-  <ItemGroup Label="Project References">
-    <ProjectReference Include="..\Synergy.Recruitment.Business\Synergy.Recruitment.Business.csproj" />
+  <ItemGroup Label="Project References">    <ProjectReference Include="..\Synergy.Recruitment.Business\Synergy.Recruitment.Business.csproj" />
     <ProjectReference Include="..\Synergy.Recruitment.Data\Synergy.Recruitment.Data.csproj" />
   </ItemGroup>
 

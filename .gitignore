@@ -4,8 +4,10 @@
 *.userosscache
 *.sln.docstates
 
-/src/Synergy.Recruitment.*/bin
-/src/Synergy.Recruitment.*/obj
+.vs/
+bin/
+obj/
+node_modules/
 
 /src/Synergy.Recruitment.Api/ClientApp/dist
 
