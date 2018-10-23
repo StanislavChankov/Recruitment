@@ -11,9 +11,10 @@ import { AnalyticsService } from './utils/analytics.service';
 // import { CandidateBaseService } from './abstract/candidate-base.service';
 
 // import { CandidateService } from '../@core/services/candidate.service';
-import { ErrorService } from '../@core/services/error.service';
-import { CandidateService } from './services/candidate.service';
+import { CandidateService } from './rest-services/candidate.service';
 import { HttpModule } from '@angular/http';
+import { DateTimeService } from './business-services/date-time.service';
+import { ErrorService } from './business-services/error.service';
 
 const socialLinks = [
   {
@@ -77,6 +78,15 @@ export const NB_CORE_PROVIDERS = [
   AnalyticsService,
 ];
 
+export const businessServices = [
+  ErrorService,
+  DateTimeService,
+];
+
+export const restServices = [
+  CandidateService,
+];
+
 @NgModule({
   imports: [
     CommonModule,
@@ -92,13 +102,14 @@ export class CoreModule {
     throwIfAlreadyLoaded(parentModule, 'CoreModule');
   }
 
+
   static forRoot(): ModuleWithProviders {
     return <ModuleWithProviders>{
       ngModule: CoreModule,
       providers: [
         ...NB_CORE_PROVIDERS,
-        ErrorService,
-        CandidateService,
+        ...restServices,
+        ...businessServices,
         // TODO: FIX it to work with abstract providers.
         // { provide: ErrorBaseService, useClass: ErrorService },
         // { provide: CandidateBaseService, useClass: CandidateService },

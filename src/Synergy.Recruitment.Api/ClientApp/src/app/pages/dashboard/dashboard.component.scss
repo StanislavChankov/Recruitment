@@ -23,5 +23,18 @@
   .container {
     flex: 1;
     padding: 10px;
+    div {
+      cursor: initial !important;
+    }
   }
+
+  .wrapper {
+    overflow-x: scroll;
+  }
+  // .handle {
+  //   padding: 0 5px;
+  //   margin-right: 5px;
+  //   background-color: rgba(0, 0, 0, 0.4);
+  //   cursor: move;
+  // }
 }

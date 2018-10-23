@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DirectedGraph xmlns="http://schemas.microsoft.com/vs/2009/dgml">
+  <Nodes>
+    <Node Id="API" Bounds="-180.574561631833,14.4476108869858,50,25.96" Label="Api" UseManualLocation="True" />
+    <Node Id="Business.Models" Bounds="-199.825185259183,-278.104740600586,106.673333333333,25.96" UseManualLocation="True" />
+    <Node Id="Core" Bounds="-182.842283480332,-162.06492482384,50,25.96" Label="Core" UseManualLocation="True" />
+    <Node Id="Data" Bounds="-259.485401087742,-74.7606995562207,50,25.96" UseManualLocation="True" />
+    <Node Id="Data.Common" Bounds="-335.583550517702,-161.099941290279,96.2466666666667,25.96" UseManualLocation="True" />
+    <Node Id="Domain.Models" Bounds="-333.274611877106,-277.809246520996,86.4433333333332,25.96" Label="Data.Models" UseManualLocation="True" />
+    <Node Id="Presentation.Models" Bounds="62.8908011716449,-274.723327160802,84.0133333333333,25.96" Label="Rest.Models" UseManualLocation="True" />
+    <Node Id="Resources" Bounds="-46.1681940876127,-281.90621986101,73.1033333333333,25.96" UseManualLocation="True" />
+    <Node Id="Services" Bounds="-102.316599148437,-77.0101917825049,64.9233333333333,25.96" Label="Business" UseManualLocation="True" />
+    <Node Id="Unit.Tests" Bounds="-72.818273288058,143.070951398948,70.2533333333333,25.96" UseManualLocation="True" />
+  </Nodes>
+  <Links>
+    <Link Source="API" Target="Data" Bounds="-217.04072686014,-42.0595783864491,49.9844740802441,56.5071868764394" />
+    <Link Source="API" Target="Services" Bounds="-143.408936073411,-44.4835680415803,55.2337599210423,58.9311765315705" />
+    <Link Source="Core" Target="Business.Models" Bounds="-156.572274445888,-243.187513948586,7.93733050336186,81.1225835286646" />
+    <Link Source="Core" Target="Domain.Models" Bounds="-268.454688377471,-245.920957902443,95.7858037505792,83.8560274825214" />
+    <Link Source="Core" Target="Resources" Bounds="-141.787967129754,-250.287754951477,109.118434686083,88.2228245315548" />
+    <Link Source="Data" Target="Core" Bounds="-223.090456813013,-129.341421400953,47.9156283358966,54.5807169026616" />
+    <Link Source="Data" Target="Data.Common" Bounds="-274.789379996504,-127.468795507851,32.3398830603196,52.70809100956" />
+    <Link Source="Data.Common" Target="Domain.Models" Bounds="-289.564712073506,-242.85145891317,1.81613680100281,81.7515248311391" />
+    <Link Source="Services" Target="Core" Bounds="-137.943860904358,-129.849720347428,54.6613903316995,52.8395270185706" />
+    <Link Source="Services" Target="Presentation.Models" Bounds="-58.382318533393,-242.019863748991,145.846839891345,165.009670420133" />
+    <Link Source="Unit.Tests" Target="API" Bounds="-137.597507791641,47.0425553329261,88.0097676737922,96.0283937637536" />
+  </Links>
+  <Properties>
+    <Property Id="Bounds" DataType="System.Windows.Rect" />
+    <Property Id="Label" Label="Label" Description="Displayable label of an Annotatable object" DataType="System.String" />
+    <Property Id="UseManualLocation" DataType="System.Boolean" />
+  </Properties>
+</DirectedGraph>

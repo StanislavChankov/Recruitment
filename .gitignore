@@ -2,6 +2,8 @@
 /src/Synergy.Recruitment.*/bin
 /src/Synergy.Recruitment.*/obj
 
+/src/Synergy.Recruitment.Api/ClientApp/dist
+
 .vs
 
 
