@@ -13,9 +13,9 @@ namespace Synergy.Recruitment.Data.Models.Configurations
         {
             builder.ToTable("Technologies");
 
-            builder.HasKey(x => x.Id);
+            builder.HasKey(t => t.Id);
 
-            builder.Property(x => x.Name).IsRequired().HasMaxLength(60);
+            builder.Property(t => t.Name).IsRequired().HasMaxLength(60);
         }
     }
 }
