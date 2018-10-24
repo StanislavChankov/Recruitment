@@ -23,6 +23,7 @@ import { TrafficChartComponent } from './traffic/traffic-chart.component';
 
 import { DragulaModule } from 'ng2-dragula';
 import { CandidateStatusComponent } from './candidate-status/candidate-status.component';
+import { FilterNavigationComponent } from './filter-navigation/filter-navigation.component';
 
 const ngxComponents = [
   StatusCardComponent,
@@ -43,6 +44,11 @@ const ngxComponents = [
     TrafficChartComponent,
 ];
 
+const synergyComponents = [
+  CandidateStatusComponent,
+  FilterNavigationComponent,
+];
+
 @NgModule({
   imports: [
     ThemeModule,
@@ -51,8 +57,8 @@ const ngxComponents = [
   ],
   declarations: [
     ...ngxComponents,
+    ...synergyComponents,
     DashboardComponent,
-    CandidateStatusComponent,
   ],
 })
 export class DashboardModule { }

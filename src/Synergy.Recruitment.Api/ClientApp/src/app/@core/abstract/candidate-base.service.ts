@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs';
 
-import { Candidate } from '../../@shared/data-models/candidates/Candidate';
+import { CandidateStatus } from '../../@shared/data-models/candidates/candidate-status';
 
 export declare abstract class CandidateBaseService {
-    abstract getCandidatesStatus(): Observable<Array<Candidate>>;
+    abstract getCandidatesStatus(): Observable<Array<CandidateStatus>>;
 }

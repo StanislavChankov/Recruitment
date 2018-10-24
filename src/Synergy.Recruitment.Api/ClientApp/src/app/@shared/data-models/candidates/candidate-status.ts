@@ -1,42 +1,42 @@
 /**
- * The candidate data model to map the candidate result.
+ * The candidate status data model to map the candidate status result.
  * @export
- * @interface Candidate
+ * @interface CandidateStatus
  */
-export interface Candidate {
+export interface CandidateStatus {
 
     /**
      * The candidate's unique identifier.
      * @type {number}
-     * @memberof Candidate
+     * @memberof CandidateStatus
      */
     id: number;
 
     /**
      * The first name of the Candidate.
      * @type {string}
-     * @memberof Candidate
+     * @memberof CandidateStatus
      */
     firstName: string;
 
     /**
      * The last name of the Candidate.
      * @type {string}
-     * @memberof Candidate
+     * @memberof CandidateStatus
      */
     lastName: string;
 
     /**
      * The position that the Candidate applied for.
      * @type {string}
-     * @memberof Candidate
+     * @memberof CandidateStatus
      */
     position: string;
 
     /**
      * The date on which this candidate was last updated.
      * @type {Date}
-     * @memberof Candidate
+     * @memberof CandidateStatus
      */
     updatedOn: Date;
 }
