@@ -1,5 +1,14 @@
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
 .vs/
 bin/
 obj/
+node_modules/
+
+/src/Synergy.Recruitment.Api/ClientApp/dist
 
 

@@ -41,40 +41,42 @@
     <ngx-security-cameras></ngx-security-cameras>
   </div>
 </div> -->
+<!-- <dashboard-filter-navigation></dashboard-filter-navigation> -->
 
-<div class="row">
+<div class="row wrapper">
   <div class="container" dragula="Candidates" [(dragulaModel)]="candidatedCandidates">
-      <ngx-candidate-status 
+      <dashboard-candidate-status 
         *ngFor="let candidate of candidatedCandidates" 
         [candidate]=candidate>
-      </ngx-candidate-status>
+      </dashboard-candidate-status>
   </div>
 
   <div class="container" dragula="Candidates" [(dragulaModel)]="approvedForInterviewCandidates">
-      <ngx-candidate-status 
+      <dashboard-candidate-status
         *ngFor="let candidate of approvedForInterviewCandidates" 
         [candidate]=candidate>
-      </ngx-candidate-status>
+      </dashboard-candidate-status>
   </div>
-
+  
   <div class="container" dragula="Candidates" [(dragulaModel)]="interviewScheduledCandidates">
-      <ngx-candidate-status 
+    <dashboard-candidate-status
         *ngFor="let candidate of interviewScheduledCandidates" 
         [candidate]=candidate>
-      </ngx-candidate-status>
+      </dashboard-candidate-status>
   </div>
 
   <div class="container" dragula="Candidates" [(dragulaModel)]="taskAssignedCandidates">
-      <ngx-candidate-status 
+      <dashboard-candidate-status
         *ngFor="let candidate of taskAssignedCandidates" 
         [candidate]=candidate>
-      </ngx-candidate-status>
+      </dashboard-candidate-status>
   </div>
+</div>
 
-  <div class="container" dragula="Candidates" [(dragulaModel)]="approvedCandidates">
+  <!-- <div class="container" dragula="Candidates" [(dragulaModel)]="approvedCandidates">
       <ngx-candidate-status 
+      [dragula]="'ngx-candidate-status'"
         *ngFor="let candidate of approvedCandidates" 
         [candidate]=candidate>
       </ngx-candidate-status>
-  </div>
-</div>
+  </div> -->
