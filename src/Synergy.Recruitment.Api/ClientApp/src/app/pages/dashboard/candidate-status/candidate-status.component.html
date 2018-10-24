@@ -1,9 +1,9 @@
-<nb-card>
+<nb-card [ngClass]=getDraggingClass()>
   <nb-card-header>
-      {{candidate.firstName}} {{candidate.lastName}}
+      {{candidatePresent.firstName}} {{candidatePresent.lastName}}
   </nb-card-header>
   <nb-card-body>
-    <div>position: {{candidate.position}}</div>
-    <div>updated on: {{candidate.updatedOn}}</div>
+    <div><i class="fas fa-user-ninja"></i> {{candidatePresent.position}}</div>
+    <div><i class="far fa-clock"></i>  {{candidatePresent.updatedBefore}}</div>
   </nb-card-body>
 </nb-card>

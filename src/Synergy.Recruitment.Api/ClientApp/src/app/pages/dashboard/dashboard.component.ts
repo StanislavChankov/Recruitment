@@ -2,8 +2,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
 import { takeWhile } from 'rxjs/operators/takeWhile' ;
 import { DragulaService } from 'ng2-dragula';
-import { Candidate } from '../../@shared/data-models/candidates/Candidate';
-import { CandidateService } from '../../@core/services/candidate.service';
+import { CandidateStatus } from '../../@shared/data-models/candidates/candidate-status';
+import { CandidateService } from '../../@core/rest-services/candidate.service';
+import { Subscription } from 'rxjs/Rx';
 
 interface CardSettings {
   title: string;
@@ -17,6 +18,8 @@ interface CardSettings {
   templateUrl: './dashboard.component.html',
 })
 export class DashboardComponent implements OnDestroy, OnInit {
+
+  //#region
 
   private alive = true;
 
@@ -77,20 +80,18 @@ export class DashboardComponent implements OnDestroy, OnInit {
     ],
   };
 
-  candidatedCandidates: Array<Candidate>;
-
-  approvedForInterviewCandidates: Array<Candidate>;
-
-  interviewScheduledCandidates: Array<Candidate>;
-
-  taskAssignedCandidates: Array<Candidate>;
-  approvedCandidates: Array<Candidate>;
-
+  //#endregion
+  candidatedCandidates: Array<CandidateStatus>;
+  approvedForInterviewCandidates: Array<CandidateStatus>;
+  interviewScheduledCandidates: Array<CandidateStatus>;
+  taskAssignedCandidates: Array<CandidateStatus>;
+  approvedCandidates: Array<CandidateStatus>;
+  subs: Subscription;
   constructor(
     private themeService: NbThemeService,
     private dragulaService: DragulaService,
     private candidateService: CandidateService) {
-
+      this.subs = new Subscription();
       this.dragulaService.createGroup('Candidates', {
         // ...
       });

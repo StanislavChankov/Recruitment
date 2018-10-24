@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System;
+
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -12,7 +14,7 @@ using Synergy.Recruitment.Core.Services;
 using Synergy.Recruitment.Data.Data;
 using Synergy.Recruitment.Data.Repositories;
 
-namespace Synergy.Recruitment.Api
+namespace Synergy.Recruitment.Api.App
 {
     public class Startup
     {
@@ -24,7 +26,7 @@ namespace Synergy.Recruitment.Api
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             services
                 .AddCors(options => options.AddPolicy("AllowAll", p =>
@@ -45,6 +47,8 @@ namespace Synergy.Recruitment.Api
                 });
 
             services.AddSwaggerGen(c => c.SwaggerDoc("v1", new Info { Title = "recruitment api", Version = "v1" }));
+
+            return services.CreateDIProvider();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
