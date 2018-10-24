@@ -7,7 +7,6 @@
   <ItemGroup Label="Project References">
     <ProjectReference Include="..\Synergy.Recruitment.Business.Models\Synergy.Recruitment.Business.Models.csproj" />
     <ProjectReference Include="..\Synergy.Recruitment.Data.Models\Synergy.Recruitment.Data.Models.csproj" />
-    <ProjectReference Include="..\Synergy.Recruitment.Resources\Synergy.Recruitment.Resources.csproj" />
   </ItemGroup>
 
 </Project>

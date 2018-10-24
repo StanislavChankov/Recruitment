@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 using Synergy.Recruitment.Data.Models.Identity;
+using Synergy.Recruitment.Resources;
 
 namespace Synergy.Recruitment.Data.Models.Configurations
 {
@@ -13,7 +14,7 @@ namespace Synergy.Recruitment.Data.Models.Configurations
     {
         public void Configure(EntityTypeBuilder<Person> builder)
         {
-            builder.ToTable("Person");
+            builder.ToTable("Person", Constants.IDENTITY_SCHEMA);
 
             builder.HasKey(p => p.Id);
 

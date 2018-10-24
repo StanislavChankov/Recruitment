@@ -2,6 +2,7 @@
 
 using Synergy.Recruitment.Data.Models;
 using Synergy.Recruitment.Data.Models.Configurations;
+using Synergy.Recruitment.Data.Models.Identity;
 
 namespace Synergy.Recruitment.Data.Data
 {
@@ -11,6 +12,8 @@ namespace Synergy.Recruitment.Data.Data
     /// <seealso cref="Microsoft.EntityFrameworkCore.DbContext"/>
     public sealed class ApplicationDbContext : DbContext
     {
+        #region Constructors
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ApplicationDbContext"/> class.
         /// </summary>
@@ -18,6 +21,10 @@ namespace Synergy.Recruitment.Data.Data
             : base(options)
         {
         }
+
+        #endregion
+
+        #region App DbSets
 
         public DbSet<CandidateCompany> CandidateCompany { get; set; }
 
@@ -49,6 +56,30 @@ namespace Synergy.Recruitment.Data.Data
 
         public DbSet<Technology> Technology { get; set; }
 
+        #endregion
+
+        #region Identity DbSets
+
+        public DbSet<Action> Action { get; set; }
+
+        public DbSet<Organization> Organization { get; set; }
+
+        public DbSet<Person> Person { get; set; }
+
+        public DbSet<Role> Role { get; set; }
+
+        public DbSet<RoleActionOrganization> RoleActionOrganization { get; set; }
+
+        public DbSet<RoleActionUser> RoleActionUser { get; set; }
+
+        public DbSet<SystemUser> SystemUser { get; set; }
+
+        public DbSet<SystemUserPassword> SystemUserPassword { get; set; }
+
+        #endregion
+
+        #region Protected Methods
+
         /// <summary>
         /// Override this method to further configure the model that was discovered by convention from the entity types
         /// exposed in <see cref="T:Microsoft.EntityFrameworkCore.DbSet`1" /> properties on your derived context. The resulting model may be cached
@@ -70,6 +101,17 @@ namespace Synergy.Recruitment.Data.Data
                 .ApplyConfiguration(new OrganizationProcessConfiguration())
                 .ApplyConfiguration(new PositionEntityConfiguration())
                 .ApplyConfiguration(new ProcessEntityConfiguration())
-                .ApplyConfiguration(new TechnologyEntityConfiguration());
+                .ApplyConfiguration(new TechnologyEntityConfiguration())
+                // Identity COnfigurations
+                .ApplyConfiguration(new ActionEntityConfiguration())
+                .ApplyConfiguration(new OrganizationEntityConfiguration())
+                .ApplyConfiguration(new PersonEntityConfiguration())
+                .ApplyConfiguration(new RoleEntityConfiguration())
+                .ApplyConfiguration(new RoleActionOrganizationEntityConfiguration())
+                .ApplyConfiguration(new RoleActionUserEntityConfiguration())
+                .ApplyConfiguration(new SystemUserEntityConfiguration())
+                .ApplyConfiguration(new SystemUserPasswordEntityConfiguration());
+
+        #endregion
     }
 }

@@ -11,9 +11,10 @@ using System;
 namespace Synergy.Recruitment.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20181024154603_initial_identity_schema")]
+    partial class initial_identity_schema
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -191,7 +192,7 @@ namespace Synergy.Recruitment.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Action","Identity");
+                    b.ToTable("Action");
                 });
 
             modelBuilder.Entity("Synergy.Recruitment.Data.Models.Identity.Organization", b =>
@@ -203,7 +204,7 @@ namespace Synergy.Recruitment.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Organization","Identity");
+                    b.ToTable("Organization");
                 });
 
             modelBuilder.Entity("Synergy.Recruitment.Data.Models.Identity.Person", b =>
@@ -223,7 +224,7 @@ namespace Synergy.Recruitment.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Person","Identity");
+                    b.ToTable("Person");
                 });
 
             modelBuilder.Entity("Synergy.Recruitment.Data.Models.Identity.Role", b =>
@@ -239,7 +240,7 @@ namespace Synergy.Recruitment.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Role","Identity");
+                    b.ToTable("Role");
                 });
 
             modelBuilder.Entity("Synergy.Recruitment.Data.Models.Identity.RoleActionOrganization", b =>
@@ -261,7 +262,7 @@ namespace Synergy.Recruitment.Data.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("RoleActionOrganization","Identity");
+                    b.ToTable("RoleActionOrganization");
                 });
 
             modelBuilder.Entity("Synergy.Recruitment.Data.Models.Identity.RoleActionUser", b =>
@@ -279,7 +280,7 @@ namespace Synergy.Recruitment.Data.Migrations
 
                     b.HasIndex("SystemUserId");
 
-                    b.ToTable("RoleActionUser","Identity");
+                    b.ToTable("RoleActionUser");
                 });
 
             modelBuilder.Entity("Synergy.Recruitment.Data.Models.Identity.SystemUser", b =>
@@ -293,7 +294,7 @@ namespace Synergy.Recruitment.Data.Migrations
 
                     b.HasIndex("PersonId");
 
-                    b.ToTable("SystemUser","Identity");
+                    b.ToTable("SystemUser");
                 });
 
             modelBuilder.Entity("Synergy.Recruitment.Data.Models.Identity.SystemUserPassword", b =>
@@ -315,7 +316,7 @@ namespace Synergy.Recruitment.Data.Migrations
 
                     b.HasIndex("SystemUserId");
 
-                    b.ToTable("SystemUserPassword","Identity");
+                    b.ToTable("SystemUserPassword");
                 });
 
             modelBuilder.Entity("Synergy.Recruitment.Data.Models.Interview", b =>
