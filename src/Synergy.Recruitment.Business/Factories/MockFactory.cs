@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using Synergy.Recruitment.Core.Extensions;
 using Synergy.Recruitment.Data.Models;
+using Synergy.Recruitment.Rest.Models.Candidate;
 
 namespace Synergy.Recruitment.Business.Factories
 {
@@ -45,26 +47,29 @@ namespace Synergy.Recruitment.Business.Factories
                 new Position { Id = 15, Name = "Senior DB Developer" },
             };
 
-        public static IEnumerable<Candidate> GetCandidates()
-            => new List<Candidate>
+        public static IEnumerable<CandidateResponse> GetCandidates()
+            => new List<CandidateResponse>
             {
-                new Candidate { Id = 1, FirstName = "Marcia", LastName = "Cantu", PositionId = 1, UpdatedOn = DateTime.Now.AddDays(-1).AddHours(-1).AddMinutes(1) },
-                new Candidate { Id = 2, FirstName = "Ryder", LastName = "Nicholson", PositionId = 2, UpdatedOn = DateTime.Now.AddDays(-2).AddHours(-2).AddMinutes(-2) },
-                new Candidate { Id = 3, FirstName = "Eloisa", LastName = "Wise", PositionId = 3, UpdatedOn = DateTime.Now.AddDays(-3).AddHours(-3).AddMinutes(-3) },
-                new Candidate { Id = 4, FirstName = "Johnathon", LastName = "Fountain", PositionId = 4, UpdatedOn = DateTime.Now.AddDays(-4).AddHours(-1).AddMinutes(-4) },
-                new Candidate { Id = 5, FirstName = "Lyra", LastName = "Thomas", PositionId = 5, UpdatedOn = DateTime.Now.AddDays(-5).AddMinutes(1) },
-                new Candidate { Id = 6, FirstName = "Lacy", LastName = "Reilly", PositionId = 6, UpdatedOn = DateTime.Now.AddDays(-6).AddMinutes(-6) },
-                new Candidate { Id = 7, FirstName = "Tiya", LastName = "Atkins", PositionId = 7, UpdatedOn = DateTime.Now.AddDays(-7).AddMinutes(-7) },
-                new Candidate { Id = 8, FirstName = "Harris", LastName = "Weir", PositionId = 8, UpdatedOn = DateTime.Now.AddDays(-8).AddMinutes(8) },
-                new Candidate { Id = 9, FirstName = "Cassia", LastName = "Livingston", PositionId = 9, UpdatedOn = DateTime.Now.AddDays(-9) },
-                new Candidate { Id = 10, FirstName = "Tehya", LastName = "Brooks", PositionId = 10, UpdatedOn = DateTime.Now.AddSeconds(-2) },
-                new Candidate { Id = 11, FirstName = "Herbie", LastName = "Major", PositionId = 11, UpdatedOn = DateTime.Now.AddSeconds(-15) },
-                new Candidate { Id = 12, FirstName = "Morwenna", LastName = "Mcdonald", PositionId = 12, UpdatedOn = DateTime.Now.AddDays(-12) },
-                new Candidate { Id = 13, FirstName = "Mariyah", LastName = "Guerrero", PositionId = 13, UpdatedOn = DateTime.Now.AddDays(-13) },
-                new Candidate { Id = 14, FirstName = "Caden", LastName = "Turnbull", PositionId = 14, UpdatedOn = DateTime.Now.AddDays(-14) },
-                new Candidate { Id = 15, FirstName = "Fearne", LastName = "Cox", PositionId = 15, UpdatedOn = DateTime.Now.AddDays(-15) },
-                new Candidate { Id = 16, FirstName = "Zoey", LastName = "Ashley", PositionId = 1, UpdatedOn = DateTime.Now.AddDays(-16) },
-                new Candidate { Id = 17, FirstName = "Luqman", LastName = "Davila", PositionId = 2, UpdatedOn = DateTime.Now.AddDays(-17) },
+                new CandidateResponse { Id = 1, FirstName = "Marcia", LastName = "Cantu", Position = GetRandomPosition(), UpdatedOn = DateTime.Now.AddDays(-1).AddHours(-1).AddMinutes(1) },
+                new CandidateResponse { Id = 2, FirstName = "Ryder", LastName = "Nicholson", Position = GetRandomPosition(), UpdatedOn = DateTime.Now.AddDays(-2).AddHours(-2).AddMinutes(-2) },
+                new CandidateResponse { Id = 3, FirstName = "Eloisa", LastName = "Wise", Position = GetRandomPosition(), UpdatedOn = DateTime.Now.AddDays(-3).AddHours(-3).AddMinutes(-3) },
+                new CandidateResponse { Id = 4, FirstName = "Johnathon", LastName = "Fountain", Position = GetRandomPosition(), UpdatedOn = DateTime.Now.AddDays(-4).AddHours(-1).AddMinutes(-4) },
+                new CandidateResponse { Id = 5, FirstName = "Lyra", LastName = "Thomas", Position = GetRandomPosition(), UpdatedOn = DateTime.Now.AddDays(-5).AddMinutes(1) },
+                new CandidateResponse { Id = 6, FirstName = "Lacy", LastName = "Reilly", Position = GetRandomPosition(), UpdatedOn = DateTime.Now.AddDays(-6).AddMinutes(-6) },
+                new CandidateResponse { Id = 7, FirstName = "Tiya", LastName = "Atkins", Position = GetRandomPosition(), UpdatedOn = DateTime.Now.AddDays(-7).AddMinutes(-7) },
+                new CandidateResponse { Id = 8, FirstName = "Harris", LastName = "Weir", Position = GetRandomPosition(), UpdatedOn = DateTime.Now.AddDays(-8).AddMinutes(8) },
+                new CandidateResponse { Id = 9, FirstName = "Cassia", LastName = "Livingston", Position = GetRandomPosition(), UpdatedOn = DateTime.Now.AddDays(-9) },
+                new CandidateResponse { Id = 10, FirstName = "Tehya", LastName = "Brooks", Position = GetRandomPosition(), UpdatedOn = DateTime.Now.AddSeconds(-2) },
+                new CandidateResponse { Id = 11, FirstName = "Herbie", LastName = "Major", Position = GetRandomPosition(), UpdatedOn = DateTime.Now.AddSeconds(-15) },
+                new CandidateResponse { Id = 12, FirstName = "Morwenna", LastName = "Mcdonald", Position = GetRandomPosition(), UpdatedOn = DateTime.Now.AddDays(-12) },
+                new CandidateResponse { Id = 13, FirstName = "Mariyah", LastName = "Guerrero", Position = GetRandomPosition(), UpdatedOn = DateTime.Now.AddDays(-13) },
+                new CandidateResponse { Id = 14, FirstName = "Caden", LastName = "Turnbull", Position = GetRandomPosition(), UpdatedOn = DateTime.Now.AddDays(-14) },
+                new CandidateResponse { Id = 15, FirstName = "Fearne", LastName = "Cox", Position = GetRandomPosition(), UpdatedOn = DateTime.Now.AddDays(-15) },
+                new CandidateResponse { Id = 16, FirstName = "Zoey", LastName = "Ashley", Position = GetRandomPosition(), UpdatedOn = DateTime.Now.AddDays(-16) },
+                new CandidateResponse { Id = 17, FirstName = "Luqman", LastName = "Davila", Position = GetRandomPosition(), UpdatedOn = DateTime.Now.AddDays(-17) },
             };
+
+        private static string GetRandomPosition()
+            => GetPositions().PickRandom().Name;
     }
 }

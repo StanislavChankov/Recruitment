@@ -19,10 +19,35 @@ namespace Synergy.Recruitment.Data.Data
         {
         }
 
-        /// <summary>
-        /// Gets or sets the customers <see cref="DbSet{}"/>.
-        /// </summary>
-        public DbSet<Technology> Technologies { get; set; }
+        public DbSet<CandidateCompany> CandidateCompany { get; set; }
+
+        public DbSet<Candidate> Candidate { get; set; }
+
+        public DbSet<CandidateInfo> CandidateInfo { get; set; }
+
+        public DbSet<CandidateJobAdvertisment> CandidateJobAdvertisment { get; set; }
+
+        public DbSet<City> City { get; set; }
+
+        public DbSet<Company> Company { get; set; }
+
+        public DbSet<Country> Country { get; set; }
+
+        public DbSet<Department> Department { get; set; }
+
+        public DbSet<Interview> Interview { get; set; }
+
+        public DbSet<InterviewType> InterviewType { get; set; }
+
+        public DbSet<JobAdvertisement> JobAdvertisement { get; set; }
+
+        public DbSet<OrganizationProcess> OrganizationProcess { get; set; }
+
+        public DbSet<Position> Position { get; set; }
+
+        public DbSet<Process> Process { get; set; }
+
+        public DbSet<Technology> Technology { get; set; }
 
         /// <summary>
         /// Override this method to further configure the model that was discovered by convention from the entity types
@@ -31,6 +56,20 @@ namespace Synergy.Recruitment.Data.Data
         /// </summary>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
             => modelBuilder
+                .ApplyConfiguration(new CandidateCompanyEntityConfiguration())
+                .ApplyConfiguration(new CandidateEntityConfiguration())
+                .ApplyConfiguration(new CandidateInfoEntityConfiguration())
+                .ApplyConfiguration(new CandidateJobAdvertismentEntityConfiguration())
+                .ApplyConfiguration(new CityEntityConfiguration())
+                .ApplyConfiguration(new CompanyEntityConfiguration())
+                .ApplyConfiguration(new CountryEntityConfiguration())
+                .ApplyConfiguration(new DepartmentEntityConfiguration())
+                .ApplyConfiguration(new InterviewEntityConfiguration())
+                .ApplyConfiguration(new InterviewTypeEntityConfiguration())
+                .ApplyConfiguration(new JobAdvertisementEntityConfiguration())
+                .ApplyConfiguration(new OrganizationProcessConfiguration())
+                .ApplyConfiguration(new PositionEntityConfiguration())
+                .ApplyConfiguration(new ProcessEntityConfiguration())
                 .ApplyConfiguration(new TechnologyEntityConfiguration());
     }
 }

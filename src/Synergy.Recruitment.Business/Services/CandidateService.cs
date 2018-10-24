@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 using Synergy.Recruitment.Business.Factories;
@@ -10,6 +11,6 @@ namespace Synergy.Recruitment.Business.Services
     public class CandidateService : ICandidateService
     {
         public Task<IEnumerable<Candidate>> GetAllAsync()
-            => Task.FromResult(MockFactory.GetCandidates());
+            => Task.FromResult(Enumerable.Empty<Candidate>());
     }
 }

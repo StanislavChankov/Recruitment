@@ -26,9 +26,10 @@ namespace Synergy.Recruitment.Api.Controllers
         [ProducesResponseType(typeof(IEnumerable<CandidateResponse>), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetAsync()
         {
-            IEnumerable<Candidate> candidates = await _candidateService.GetAllAsync();
+            // IEnumerable<CandidateResponse> candidates = await _candidateService.GetAllAsync();
 
-            IEnumerable<CandidateResponse> response = candidates.Select(CandidateFactory.GetCandidateResponse);
+            // IEnumerable<CandidateResponse> response = candidates.Select(CandidateFactory.GetCandidateResponse);
+            var response = MockFactory.GetCandidates();
 
             return Ok(response);
         }
