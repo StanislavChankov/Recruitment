@@ -19,9 +19,9 @@ namespace Synergy.Recruitment.Business.Factories
                 => new CandidateResponse
                 {
                     Id = technology.Id,
-                    FirstName = technology.FirstName,
-                    LastName = technology.LastName,
-                    Position = MockFactory.GetPositions().FirstOrDefault(p => p.Id == technology.PositionId).Name,
+                    // FirstName = technology.FirstName,
+                    // LastName = technology.LastName,
+                    // Position = MockFactory.GetPositions().FirstOrDefault(p => p.Id == technology.PositionId).Name,
                     UpdatedOn = technology.UpdatedOn,
                 };
     }

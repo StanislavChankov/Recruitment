@@ -2,7 +2,7 @@
 
 namespace Synergy.Recruitment.Data.Models
 {
-    public class Position
+    public class Process
     {
         public long Id { get; set; }
 
@@ -10,10 +10,6 @@ namespace Synergy.Recruitment.Data.Models
 
         public string Description { get; set; }
 
-        public long DepartmentId { get; set; }
-
-        public virtual Department Department { get; set; }
-
-        public virtual ICollection<JobAdvertisement> JobAdvertisments { get; set; }
+        public virtual ICollection<OrganizationProcess> OrganizationProcesses { get; set; }
     }
 }
