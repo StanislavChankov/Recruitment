@@ -3,13 +3,13 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
 
-  <ItemGroup Label="NuGet Packages">
+  <ItemGroup Label="Package References">
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="3.0.0" />
     <PackageReference Include="LightInject.Microsoft.DependencyInjection" Version="2.0.5" />
   </ItemGroup>
 
-  <ItemGroup>
+  <ItemGroup Label="Tool References">
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
   </ItemGroup>
 

@@ -19,6 +19,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Synergy.Recruitment.Busines
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Synergy.Recruitment.Rest.Models", "src\Synergy.Recruitment.Rest.Models\Synergy.Recruitment.Rest.Models.csproj", "{EB94F35B-7579-4BD6-98AC-5643FECFA1BE}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{5D6E1F7D-8532-49FE-9471-59E9126A9C5A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Synergy.Recruitment.Test", "test\Synergy.Recruitment.Test\Synergy.Recruitment.Test.csproj", "{59199F6E-AA74-4F90-BD5A-957DFEE64BC3}"
+EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "items", "items", "{B6B50521-D21B-4407-B9CB-BBA95F7110CC}"
 	ProjectSection(SolutionItems) = preProject
 		items\ReferencesDiagram.dgml = items\ReferencesDiagram.dgml
@@ -27,8 +31,7 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Synergy.Recruitment.Business.Models", "src\Synergy.Recruitment.Business.Models\Synergy.Recruitment.Business.Models.csproj", "{7CB803C8-DBC2-4BF3-AED1-EC48518ADE39}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Synergy.Recruitment.Resources", "src\Synergy.Recruitment.Resources\Synergy.Recruitment.Resources.csproj", "{729C1921-2132-4A3B-BB36-10C932C2293B}"
-EndProject
-Global
+EndProjectGlobal
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -62,15 +65,14 @@ Global
 		{EB94F35B-7579-4BD6-98AC-5643FECFA1BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EB94F35B-7579-4BD6-98AC-5643FECFA1BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EB94F35B-7579-4BD6-98AC-5643FECFA1BE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7CB803C8-DBC2-4BF3-AED1-EC48518ADE39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7CB803C8-DBC2-4BF3-AED1-EC48518ADE39}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7CB803C8-DBC2-4BF3-AED1-EC48518ADE39}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7CB803C8-DBC2-4BF3-AED1-EC48518ADE39}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59199F6E-AA74-4F90-BD5A-957DFEE64BC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59199F6E-AA74-4F90-BD5A-957DFEE64BC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59199F6E-AA74-4F90-BD5A-957DFEE64BC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59199F6E-AA74-4F90-BD5A-957DFEE64BC3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{729C1921-2132-4A3B-BB36-10C932C2293B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{729C1921-2132-4A3B-BB36-10C932C2293B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{729C1921-2132-4A3B-BB36-10C932C2293B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{729C1921-2132-4A3B-BB36-10C932C2293B}.Release|Any CPU.Build.0 = Release|Any CPU
-	EndGlobalSection
+		{729C1921-2132-4A3B-BB36-10C932C2293B}.Release|Any CPU.Build.0 = Release|Any CPU	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
@@ -83,8 +85,7 @@ Global
 		{D13AECC8-EDFD-4C70-8F1E-6498FE450FC3} = {A44228FE-F16B-49D1-B06B-B195E30984CC}
 		{EB94F35B-7579-4BD6-98AC-5643FECFA1BE} = {A44228FE-F16B-49D1-B06B-B195E30984CC}
 		{7CB803C8-DBC2-4BF3-AED1-EC48518ADE39} = {A44228FE-F16B-49D1-B06B-B195E30984CC}
-		{729C1921-2132-4A3B-BB36-10C932C2293B} = {A44228FE-F16B-49D1-B06B-B195E30984CC}
-	EndGlobalSection
+		{729C1921-2132-4A3B-BB36-10C932C2293B} = {A44228FE-F16B-49D1-B06B-B195E30984CC}		{59199F6E-AA74-4F90-BD5A-957DFEE64BC3} = {5D6E1F7D-8532-49FE-9471-59E9126A9C5A}	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {67668F04-152F-44D9-873C-F08C0EB641A9}
 	EndGlobalSection
