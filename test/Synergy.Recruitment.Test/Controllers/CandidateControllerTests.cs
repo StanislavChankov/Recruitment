@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using NSubstitute;
@@ -43,7 +43,7 @@ namespace Synergy.Recruitment.Test.Controllers
 
             Assert.IsInstanceOfType(result, typeof(OkObjectResult));
             Assert.IsInstanceOfType(candidateResult, typeof(IEnumerable<CandidateResponse>));
-            Assert.IsFalse(candidateResult.Any());
+            Assert.IsTrue(candidateResult.Any());
         }
 
         #endregion
