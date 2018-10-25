@@ -6,8 +6,8 @@ before_build:
 - choco install opencover.portable
 - choco install codecov
 - cmd: cd ./src/Synergy.Recruitment.Api/ClientApp
-- cmd npm install
-- cmd cd ../../..
+- cmd: npm install
+- cmd: cd ../../..
 
 build:
   project: Synergy.Recruitment.sln
