@@ -40,5 +40,4 @@ export const routedComponents = [
   BubbleMapComponent,
   SearchMapComponent,
   MapComponent,
-  SearchComponent,
 ];
