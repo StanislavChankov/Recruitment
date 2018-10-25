@@ -2,10 +2,9 @@ version: '1.0.{build}'
 image: Visual Studio 2017
 
 before_build:
-  # Display .NET Core version
-  - cmd: dotnet --version
-  # install choco tools
-  - choco install codecov
+- nuget restore
+- choco install opencover.portable
+- choco install codecov
   
 build:
   project: Synergy.Recruitment.sln
