@@ -1,18 +1,15 @@
 version: '1.0.{build}'
 image: Visual Studio 2017
 
-init:
-  # Good practise, because Windows line endings are different from Unix/Linux ones
-  - cmd: git config --global core.autocrlf true
 before_build:
-  # Display .NET Core version
-  - cmd: dotnet --version
-  # Display minimal restore text
-  - cmd: dotnet restore --verbosity m
-  # install choco tools
-  - choco install codecov
-build_script:
-  - cmd: dotnet build ./src/Synergy.Recruitment.Api/Synergy.Recruitment.Api.csproj -c Release
+- nuget restore
+- choco install opencover.portable
+- choco install codecov
+  
+build:
+  project: Synergy.Recruitment.sln
+  verbosity: minimal
+  
 test_script:
   - cmd: dotnet test ./test/Synergy.Recruitment.Test/Synergy.Recruitment.Test.csproj -c Debug -l Appveyor /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
-  - cmd: codecov -f ./test/Synergy.Recruitment.Test/coverage.opencover.xml
+  - cmd: codecov -f ./tests/Synergy.Recruitment.Test/coverage.opencover.xml
