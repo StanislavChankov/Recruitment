@@ -14,4 +14,4 @@ build:
   
 test_script:
   - cmd: dotnet test ./test/Synergy.Recruitment.Test/Synergy.Recruitment.Test.csproj -c Debug -l Appveyor /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
-  - cmd: codecov -f ./tests/Synergy.Recruitment.Test/coverage.opencover.xml
+  - cmd: codecov -f ./test/Synergy.Recruitment.Test/coverage.opencover.xml
