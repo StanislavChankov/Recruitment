@@ -21,5 +21,14 @@
 
 
         #endregion
+
+        #region Database
+
+        /// <summary>
+        /// The database identity schema name.
+        /// </summary>
+        public const string IDENTITY_SCHEMA = "Identity";
+
+        #endregion
     }
 }
