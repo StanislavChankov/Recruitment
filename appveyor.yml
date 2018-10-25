@@ -4,8 +4,6 @@ image: Visual Studio 2017
 before_build:
   # Display .NET Core version
   - cmd: dotnet --version
-  # Restoring nuget packages
-- nuget restore
   # install choco tools
   - choco install codecov
   
