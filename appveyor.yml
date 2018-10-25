@@ -8,8 +8,8 @@ before_build:
   - choco install codecov
   
 build:
-  - project: Synergy.Recruitment.sln
-  - verbosity: minimal
+  project: Synergy.Recruitment.sln
+  verbosity: minimal
   
 test_script:
   - cmd: dotnet test ./test/Synergy.Recruitment.Test/Synergy.Recruitment.Test.csproj -c Debug -l Appveyor /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
