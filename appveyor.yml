@@ -1,8 +1,4 @@
-version: '1.0.{build}'
-image: Visual Studio 2017
-
-init:
-  - git config --global core.autocrlf true
+image: Visual Studio 2015
 
 before_build:
 - nuget restore
@@ -12,7 +8,3 @@ before_build:
 build:
   project: Synergy.Recruitment.sln
   verbosity: minimal
-  
-test_script:
-  - cmd: dotnet test ./test/Synergy.Recruitment.Test/Synergy.Recruitment.Test.csproj -c Debug -l Appveyor /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
-  - cmd: codecov -f ./tests/Synergy.Recruitment.Test/coverage.opencover.xml
