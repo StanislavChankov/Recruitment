@@ -211,7 +211,7 @@ namespace Synergy.Recruitment.Data.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<DateTime>("BirthDate");
+                    b.Property<DateTime?>("BirthDate");
 
                     b.Property<string>("EmailAddress");
 
@@ -220,6 +220,8 @@ namespace Synergy.Recruitment.Data.Migrations
                     b.Property<bool>("IsActive");
 
                     b.Property<string>("LastName");
+
+                    b.Property<long>("SystemUserId");
 
                     b.HasKey("Id");
 
@@ -287,11 +289,18 @@ namespace Synergy.Recruitment.Data.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<long>("OrganizationId");
+
                     b.Property<long>("PersonId");
+
+                    b.Property<long>("SystemUserPasswordId");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PersonId");
+                    b.HasIndex("OrganizationId");
+
+                    b.HasIndex("PersonId")
+                        .IsUnique();
 
                     b.ToTable("SystemUser","Identity");
                 });
@@ -313,7 +322,8 @@ namespace Synergy.Recruitment.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("SystemUserId");
+                    b.HasIndex("SystemUserId")
+                        .IsUnique();
 
                     b.ToTable("SystemUserPassword","Identity");
                 });
@@ -525,17 +535,22 @@ namespace Synergy.Recruitment.Data.Migrations
 
             modelBuilder.Entity("Synergy.Recruitment.Data.Models.Identity.SystemUser", b =>
                 {
-                    b.HasOne("Synergy.Recruitment.Data.Models.Identity.Person", "Person")
+                    b.HasOne("Synergy.Recruitment.Data.Models.Identity.Organization", "Organization")
                         .WithMany("SystemUsers")
-                        .HasForeignKey("PersonId")
+                        .HasForeignKey("OrganizationId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("Synergy.Recruitment.Data.Models.Identity.Person", "Person")
+                        .WithOne("SystemUser")
+                        .HasForeignKey("Synergy.Recruitment.Data.Models.Identity.SystemUser", "PersonId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Synergy.Recruitment.Data.Models.Identity.SystemUserPassword", b =>
                 {
                     b.HasOne("Synergy.Recruitment.Data.Models.Identity.SystemUser", "SystemUser")
-                        .WithMany("SystemUserPasswords")
-                        .HasForeignKey("SystemUserId")
+                        .WithOne("SystemUserPassword")
+                        .HasForeignKey("Synergy.Recruitment.Data.Models.Identity.SystemUserPassword", "SystemUserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

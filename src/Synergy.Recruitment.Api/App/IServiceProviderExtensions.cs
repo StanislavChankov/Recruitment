@@ -3,7 +3,8 @@ using System.Reflection;
 
 using LightInject;
 using LightInject.Microsoft.DependencyInjection;
-
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 
 using Synergy.Recruitment.Resources;
@@ -36,12 +37,16 @@ namespace Synergy.Recruitment.Api.App
         {
             var container = new ServiceContainer(new ContainerOptions() { EnablePropertyInjection = false });
             container.ScopeManagerProvider = new PerLogicalCallContextScopeManagerProvider();
-
+        
             // Register all data repositories.
             container.RegisterAssembly(Load(Constants.Recruitment_DATA_ASSEMBLY_NAME), CreateScopeLifetyme, FilterByCoreInterfaces);
 
             // Register all services.
             container.RegisterAssembly(Load(Constants.Recruitment_BUSINESS_ASSEMBLY_NAME), CreateScopeLifetyme, FilterByCoreInterfaces);
+
+            // Add context accessors
+            serviceCollection.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            serviceCollection.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
 
             return container.CreateServiceProvider(serviceCollection);
         }

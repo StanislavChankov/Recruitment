@@ -9,5 +9,7 @@ namespace Synergy.Recruitment.Data.Models.Identity
         public string Name { get; set; }
 
         public ICollection<RoleActionOrganization> RoleActionOrganizations { get; set; }
+
+        public ICollection<SystemUser> SystemUsers { get; set; }
     }
 }
