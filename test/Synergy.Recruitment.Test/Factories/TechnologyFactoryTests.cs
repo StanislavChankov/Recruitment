@@ -28,7 +28,7 @@ namespace Synergy.Recruitment.Test.Factories
 
         #region Private Mock Methods
 
-        public static IEnumerable<object[]> GetTechnologies
+        private static IEnumerable<object[]> GetTechnologies
             => new[]
             {
                 new object[]
@@ -43,8 +43,8 @@ namespace Synergy.Recruitment.Test.Factories
                 {
                     new Tuple<Technology, TechnologyResponse>
                     (
-                        new Technology { Id = 2, Name = "" },
-                        new TechnologyResponse { Id = 2, Name = "" }
+                        new Technology { Id = 2, Name = string.Empty },
+                        new TechnologyResponse { Id = 2, Name = string.Empty }
                     ),
                 },
                 new object[]

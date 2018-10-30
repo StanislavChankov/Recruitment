@@ -1,7 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
+using Synergy.Recruitment.Data.Common.Configurations;
+using Synergy.Recruitment.Data.Common.Configurations.Identity;
 using Synergy.Recruitment.Data.Models;
-using Synergy.Recruitment.Data.Models.Configurations;
 using Synergy.Recruitment.Data.Models.Identity;
 
 namespace Synergy.Recruitment.Data.Data

@@ -11,12 +11,14 @@ namespace Synergy.Recruitment.Data.Models.Identity
 
         public string LastName { get; set; }
 
-        public DateTime BirthDate { get; set; }
+        public DateTime? BirthDate { get; set; }
 
         public string EmailAddress { get; set; }
 
         public bool IsActive { get; set; }
 
-        public ICollection<SystemUser> SystemUsers { get; set; }
+        public long SystemUserId { get; set; }
+
+        public SystemUser SystemUser { get; set; }
     }
 }

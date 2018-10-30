@@ -30,5 +30,14 @@
         public const string IDENTITY_SCHEMA = "Identity";
 
         #endregion
+
+        #region Settings
+
+        /// <summary>
+        /// The settings key idenity URL.
+        /// </summary>
+        public const string SETTINGS_KEY_IDENITY_URL = "IdentityServerLocation";
+
+        #endregion
     }
 }

@@ -280,6 +280,11 @@ namespace Synergy.Recruitment.Data.Common.Abstract
             return Queryable.Where(where);
         }
 
+        private T QueryableFirstOrDefault(Expression<Func<T, bool>> predicate)
+        {
+            return Queryable.FirstOrDefault(predicate);
+        }
+
         private IQueryable<T> QueryableWhereInclude(Expression<Func<T, bool>> where, Expression<Func<T, object>>[] include)
         {
             return Include(QueryableWhere(where), include);

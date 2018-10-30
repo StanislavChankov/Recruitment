@@ -8,9 +8,15 @@ namespace Synergy.Recruitment.Data.Models.Identity
 
         public long PersonId { get; set; }
 
+        public long OrganizationId { get; set; }
+
+        public long SystemUserPasswordId { get; set; }
+
         public Person Person { get; set; }
 
-        public ICollection<SystemUserPassword> SystemUserPasswords { get; set; }
+        public Organization Organization { get; set; }
+
+        public SystemUserPassword SystemUserPassword { get; set; }
 
         public ICollection<RoleActionUser> RoleActionUsers { get; set; }
     }

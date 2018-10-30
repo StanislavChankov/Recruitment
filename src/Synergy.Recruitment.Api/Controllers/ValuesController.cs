@@ -1,17 +1,28 @@
-﻿using System.Collections.Generic;
+﻿using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Mvc;
+
+using Synergy.Recruitment.Core.Services.Identity;
 
 namespace Synergy.Recruitment.Api.Controllers
 {
     [Route("api/[controller]")]
     public class ValuesController : Controller
     {
-        // GET api/values
-        [HttpGet]
-        public IEnumerable<string> Get()
+        private readonly IPersonService _personService;
+
+        public ValuesController(IPersonService personService) 
         {
-            return new string[] { "value1", "value2" };
+            _personService = personService;
+        }
+
+        // GET api/values
+        [HttpGet("{id:long}")]
+        public async Task<IActionResult> GetAsync([FromRoute] long id)
+        {
+            var result = await _personService.GetByUserIdAsync(id);
+
+            return Ok(result);
         }
 
         // GET api/values/5
