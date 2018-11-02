@@ -1,17 +1,16 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 using Synergy.Recruitment.Business.Factories;
 using Synergy.Recruitment.Core.Services;
-using Synergy.Recruitment.Data.Models;
 using Synergy.Recruitment.Rest.Models.Candidate;
 
 namespace Synergy.Recruitment.Api.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     public class CandidateController : Controller
     {

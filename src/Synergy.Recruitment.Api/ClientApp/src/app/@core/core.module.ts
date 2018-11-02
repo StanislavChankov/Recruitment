@@ -45,7 +45,9 @@ export const NB_CORE_PROVIDERS = [
   ...DataModule.forRoot().providers,
   ...JwtModule.forRoot({
     config: {
-      tokenGetter: () => localStorage.getItem('access_token_key'),
+      tokenGetter: function getToken() {
+        return localStorage.getItem('access_token_key');
+      },
     },
   }).providers,
   ...NbAuthModule.forRoot({

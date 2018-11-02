@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 
 using Synergy.Recruitment.Business.Factories;
 using Synergy.Recruitment.Business.Models.Users;
@@ -22,6 +23,9 @@ namespace Synergy.Recruitment.Business.Services.Identity
 
         public async Task<UserPassword> ValidateCredentialsAsync(string emailAddress, string password)
         {
+            emailAddress = emailAddress ?? throw new ArgumentNullException(nameof(emailAddress));
+            password = password ?? throw new ArgumentNullException(nameof(password));
+
             var selectExp = UserFactory.GetUserByEmail(emailAddress, default(bool?));
 
             UserPassword user = await _userRepository.GetByEmailAsync(UserFactory.GetPersonOrganization, selectExp);

@@ -15,7 +15,7 @@ using Synergy.Recruitment.Rest.Models.Candidate;
 namespace Synergy.Recruitment.Test.Controllers
 {
     [TestClass]
-    [TestCategory("Candidates")]
+    [TestCategory("Candidate")]
     public class CandidateControllerTests
     {
         private CandidateController _controller;

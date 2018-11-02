@@ -36,6 +36,9 @@ namespace Synergy.Recruitment.Business.Services
         /// See <see cref="ISecurityService" /> for more.
         public string GetHashedPassword(string plainText, string salt)
         {
+            plainText = plainText ?? throw new ArgumentNullException(nameof(plainText));
+            salt = salt ?? throw new ArgumentNullException(nameof(plainText));
+
             byte[] passwordBytes = GenerateSaltedHash(plainText, salt);
 
             var saltedHashString = Convert.ToBase64String(passwordBytes);

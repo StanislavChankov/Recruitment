@@ -10,7 +10,7 @@ using Synergy.Recruitment.Data.Models.Identity;
 namespace Synergy.Recruitment.Test.Factories
 {
     [TestClass]
-    [TestCategory("Persons")]
+    [TestCategory("Person")]
     public class PersonFactoryTests
     {
         [DataTestMethod]
