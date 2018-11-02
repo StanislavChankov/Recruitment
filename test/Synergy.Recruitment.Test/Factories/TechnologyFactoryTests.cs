@@ -9,7 +9,7 @@ using Synergy.Recruitment.Rest.Models.Technology;
 namespace Synergy.Recruitment.Test.Factories
 {
     [TestClass]
-    [TestCategory("Technologies")]
+    [TestCategory("Technology")]
     public class TechnologyFactoryTests
     {
         #region Tests

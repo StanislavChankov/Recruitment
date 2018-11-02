@@ -34,6 +34,10 @@ const socialLinks = [
   },
 ];
 
+export  function getToken() {
+  return localStorage.getItem('access_token_key');
+}
+
 export class NbSimpleRoleProvider extends NbRoleProvider {
   getRole() {
     // here you could provide any role based on any auth flow
@@ -45,7 +49,7 @@ export const NB_CORE_PROVIDERS = [
   ...DataModule.forRoot().providers,
   ...JwtModule.forRoot({
     config: {
-      tokenGetter: () => localStorage.getItem('access_token_key'),
+      tokenGetter: getToken,
     },
   }).providers,
   ...NbAuthModule.forRoot({

@@ -15,7 +15,7 @@ using Synergy.Recruitment.Rest.Models.Technology;
 namespace Synergy.Recruitment.Test.Controllers
 {
     [TestClass]
-    [TestCategory("Technologies")]
+    [TestCategory("Technology")]
     public class TechnologyControllerTests
     {
         private TechnologyController _controller;
