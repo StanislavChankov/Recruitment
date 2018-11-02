@@ -1,20 +1,20 @@
 import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-import { NbAuthModule, NbDummyAuthStrategy } from '@nebular/auth';
-import { NbSecurityModule, NbRoleProvider } from '@nebular/security';
+import { HttpModule } from '@angular/http';
+
 import { of as observableOf } from 'rxjs';
+import { NbAuthModule, NbAuthJWTToken } from '@nebular/auth';
+import { NbSecurityModule, NbRoleProvider } from '@nebular/security';
+import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
 
 import { throwIfAlreadyLoaded } from './module-import-guard';
 import { DataModule } from './data/data.module';
 import { AnalyticsService } from './utils/analytics.service';
-// import { ErrorBaseService } from './abstract/error-base.service';
-// import { CandidateBaseService } from './abstract/candidate-base.service';
-
-// import { CandidateService } from '../@core/services/candidate.service';
-import { CandidateService } from './rest-services/candidate.service';
-import { HttpModule } from '@angular/http';
-import { DateTimeService } from './business-services/date-time.service';
-import { ErrorService } from './business-services/error.service';
+import { CandidateService, DateTimeService, ErrorService } from './services/index';
+import { AuthService } from './auth/auth.service';
+import { TokenStorage, UserStorage } from './storages';
+import { TokenInterceptor } from './middlewares/token-interceptor';
 
 const socialLinks = [
   {
@@ -43,24 +43,55 @@ export class NbSimpleRoleProvider extends NbRoleProvider {
 
 export const NB_CORE_PROVIDERS = [
   ...DataModule.forRoot().providers,
-  ...NbAuthModule.forRoot({
-
-    strategies: [
-      NbDummyAuthStrategy.setup({
-        name: 'email',
-        delay: 3000,
-      }),
-    ],
-    forms: {
-      login: {
-        socialLinks: socialLinks,
-      },
-      register: {
-        socialLinks: socialLinks,
-      },
+  ...JwtModule.forRoot({
+    config: {
+      tokenGetter: () => localStorage.getItem('access_token_key'),
     },
   }).providers,
-
+  ...NbAuthModule.forRoot({
+      forms: {
+        login: {
+          strategy: 'email',
+          socialLinks: socialLinks,
+        },
+        register: {
+          socialLinks: socialLinks,
+        },
+      },
+    strategies: [
+      [AuthService,
+        {
+          name: 'email',
+          token:
+          {
+            class: NbAuthJWTToken,  // <----
+          },
+        }],
+      // NbPasswordAuthStrategy.setup({
+      //   name: 'email',
+      //   baseEndpoint: 'http://localhost:4400/api/auth/',
+      //   logout: {
+      //     redirect: {
+      //       success: '/auth/login',
+      //       failure: '/auth/login',
+      //     },
+      //   },
+      //   requestPass: {
+      //     redirect: {
+      //       success: '/auth/reset-password',
+      //     },
+      //   },
+      //   resetPass: {
+      //     redirect: {
+      //       success: '/auth/login',
+      //     },
+      //   },
+      //   errors: {
+      //     key: 'data.errors',
+      //   },
+      // }),
+    ],
+  }).providers,
   NbSecurityModule.forRoot({
     accessControl: {
       guest: {
@@ -81,16 +112,27 @@ export const NB_CORE_PROVIDERS = [
 export const businessServices = [
   ErrorService,
   DateTimeService,
+  AuthService,
+];
+
+export const storages = [
+  TokenStorage,
+  UserStorage,
 ];
 
 export const restServices = [
   CandidateService,
 ];
 
+export const externalServices = [
+  JwtHelperService,
+];
+
 @NgModule({
   imports: [
     CommonModule,
     HttpModule,
+    JwtModule.forRoot({}),
   ],
   exports: [
     NbAuthModule,
@@ -102,7 +144,6 @@ export class CoreModule {
     throwIfAlreadyLoaded(parentModule, 'CoreModule');
   }
 
-
   static forRoot(): ModuleWithProviders {
     return <ModuleWithProviders>{
       ngModule: CoreModule,
@@ -110,6 +151,13 @@ export class CoreModule {
         ...NB_CORE_PROVIDERS,
         ...restServices,
         ...businessServices,
+        ...externalServices,
+        ...storages,
+        {
+          provide: HTTP_INTERCEPTORS,
+          useClass: TokenInterceptor,
+          multi: true,
+        },
         // TODO: FIX it to work with abstract providers.
         // { provide: ErrorBaseService, useClass: ErrorService },
         // { provide: CandidateBaseService, useClass: CandidateService },

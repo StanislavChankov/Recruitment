@@ -3,9 +3,9 @@ import { Component, OnInit, Input, ElementRef } from '@angular/core';
 import 'rxjs/add/observable/interval';
 import { Observable } from 'rxjs/Rx';
 
-import { CandidateStatus } from '../../../@shared/data-models/candidates/candidate-status';
+import { CandidateStatus } from '../../../@shared/data-models';
 import { CandidateStatusPresent } from '../../../@shared/present-models/candidates/candidate-status.present';
-import { DateTimeService } from '../../../@core/business-services/date-time.service';
+import { DateTimeService } from '../../../@core/services/index';
 import { CandidateFactory } from '../../../@shared/factories/candidate-factory';
 
 @Component({

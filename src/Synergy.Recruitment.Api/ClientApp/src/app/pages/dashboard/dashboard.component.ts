@@ -1,10 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { NbThemeService } from '@nebular/theme';
+
 import { takeWhile } from 'rxjs/operators/takeWhile' ;
+
 import { DragulaService } from 'ng2-dragula';
+import { NbThemeService } from '@nebular/theme';
+
 import { CandidateStatus } from '../../@shared/data-models/candidates/candidate-status';
-import { CandidateService } from '../../@core/rest-services/candidate.service';
-import { Subscription } from 'rxjs/Rx';
+import { CandidateService } from '../../@core/services';
 
 interface CardSettings {
   title: string;
@@ -86,12 +88,26 @@ export class DashboardComponent implements OnDestroy, OnInit {
   interviewScheduledCandidates: Array<CandidateStatus>;
   taskAssignedCandidates: Array<CandidateStatus>;
   approvedCandidates: Array<CandidateStatus>;
-  subs: Subscription;
+
   constructor(
     private themeService: NbThemeService,
     private dragulaService: DragulaService,
     private candidateService: CandidateService) {
-      this.subs = new Subscription();
+      this.createDragulaGroup();
+      this.themeService.getJsTheme()
+        .pipe(takeWhile(() => this.alive))
+        .subscribe(theme => {
+          this.statusCards = this.statusCardsByThemes[theme.name];
+      });
+  }
+
+  ngOnDestroy() {
+    this.alive = false;
+  }
+
+  private createDragulaGroup(): void {
+    const candidateGroup = this.dragulaService.find('Candidates');
+    if (!candidateGroup) {
       this.dragulaService.createGroup('Candidates', {
         // ...
       });
@@ -99,16 +115,7 @@ export class DashboardComponent implements OnDestroy, OnInit {
       this.dragulaService.dropModel('Candidates').subscribe(args => {
         // console.log(args);
       });
-
-    this.themeService.getJsTheme()
-      .pipe(takeWhile(() => this.alive))
-      .subscribe(theme => {
-        this.statusCards = this.statusCardsByThemes[theme.name];
-    });
-  }
-
-  ngOnDestroy() {
-    this.alive = false;
+    }
   }
 
   ngOnInit(): void {
