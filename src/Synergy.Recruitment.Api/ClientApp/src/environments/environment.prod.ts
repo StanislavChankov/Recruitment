@@ -5,14 +5,20 @@
  */
 export const environment = {
   production: true,
-  baseUrl: 'http://amazing94-001-site1.gtempurl.com/api',
+  baseUrl: 'http://amazing94-001-site1.gtempurl.com',
 };
 
 export const apiUrls = {
   technology: {
-    getAll: environment.baseUrl + '/technology',
+    getAll: environment.baseUrl + '/api/technology',
   },
   candidate: {
-    getAll: environment.baseUrl + '/candidate',
+    getAll: environment.baseUrl + '/api/candidate',
+  },
+  identity: {
+    token: environment.baseUrl + '/connect/token',
+    userInfo: environment.baseUrl + '/connect/userinfo',
+    register: environment.baseUrl + '/account/register',
+    actions: environment.baseUrl + '/users/{0}/actions',
   },
 };
