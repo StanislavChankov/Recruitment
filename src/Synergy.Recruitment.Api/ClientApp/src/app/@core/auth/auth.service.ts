@@ -19,6 +19,7 @@ import { AbstractAuthService } from '../abstract/abstract-auth.service';
 import { AuthConstants, ErrorMessagesConstants, StorageConstants } from '../../@shared/constants';
 import { ActionTypes } from '../../@shared/enums';
 import { UserStorage, TokenStorage } from '../storages/index';
+import { THROW_IF_NOT_FOUND } from '@angular/core/src/di/injector';
 
 @Injectable()
 export class AuthService
@@ -59,8 +60,6 @@ export class AuthService
                 }
 
                 this.tokenStorage.setToken(tokenResponse);
-                this.getUserInfo()
-                    .subscribe(userInfo => this.userStorage.setUserInfo(userInfo));
 
                 const access_token = new NbAuthSimpleToken(tokenResponse.access_token, 'addValidOwner');
 
@@ -74,15 +73,12 @@ export class AuthService
 
                 return successAuthResult;
             })
+            .flatMap(() => this.authorize())
             .catch((res: HttpErrorResponse) => {
                 console.error(res.message);
 
                 return Observable.throw(res);
             });
-            // TODO: authorize
-            // .flatMap(() => {
-            //     return this.authorize();
-            // });
     }
 
     public getUserInfo(): Observable<UserInfo> {
@@ -106,16 +102,22 @@ export class AuthService
     }
 
     public authorize(): Observable<NbAuthResult> {
-        const userId: number = this.userStorage.getUserInfo().sub;
-        const getActionsUrl: string = String.Format(apiUrls.identity.actions, userId);
+        return this.getUserInfo()
+                    .map(userInfo => {
+                        this.userStorage.setUserInfo(userInfo);
+                    })
+                    .flatMap(() => {
+                        const userId: number = this.userStorage.getUserInfo().sub;
+                        const getActionsUrl: string = String.Format(apiUrls.identity.actions, userId);
 
-        return this.http
-        .get(getActionsUrl)
-        .map((res: number) => {
-            this.userStorage.setUserActions(res);
+                        return this.http
+                        .get(getActionsUrl)
+                        .map((res: number) => {
+                            this.userStorage.setUserActions(res);
 
-            return new NbAuthResult(true, undefined);
-        });
+                            return new NbAuthResult(true, undefined, 'pages/iot-dashboard');
+                        });
+                    });
     }
 
     public isAuthenticated(): boolean {
@@ -124,23 +126,28 @@ export class AuthService
         return !this.jwtHelper.isTokenExpired(token);
     }
 
-    public isAuthorized(actionType?: ActionTypes, requestedUrl?: string): boolean {
-        const requiredRoleAction: number = this.getRequiredRoleAction(actionType, requestedUrl);
+    public isAuthorized(requestedUrl: string): boolean {
+        if (!this.isAuthenticated()) {
+            return false;
+        }
+
+        const requiredRoleAction: number = this.getRequiredRoleAction(requestedUrl);
         const requiredRoleActionFlag: number = 1 << requiredRoleAction;
         const userActions: number = this.userStorage.getUserActions();
 
         if ((requiredRoleActionFlag & userActions) > 0) {
-        return true;
+            return true;
         }
 
         return false;
     }
 
-    private getRequiredRoleAction(actionType?: ActionTypes, requestedUrl?: string): number {
-        if (actionType) {
-        return actionType;
-        } else if (requestedUrl) {
-        return roleActions.find(a => a.url === requestedUrl).actionEnum;
+    private getRequiredRoleAction(requestedUrl?: string): number {
+        if (requestedUrl) {
+            const actionByUrl = roleActions.find(a => a.url === requestedUrl);
+            if (actionByUrl) {
+                return actionByUrl.actionEnum;
+            }
         }
 
         throw new Error(ErrorMessagesConstants.nameOrUlrNotProvided);
