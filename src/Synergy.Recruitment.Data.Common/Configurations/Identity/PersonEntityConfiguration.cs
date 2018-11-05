@@ -21,6 +21,10 @@ namespace Synergy.Recruitment.Data.Common.Configurations.Identity
 
             builder.HasKey(p => p.Id);
 
+            builder.Property(x => x.FirstName).IsRequired().HasMaxLength(60);
+            builder.Property(x => x.LastName).IsRequired().HasMaxLength(60);
+            builder.Property(x => x.EmailAddress).IsRequired().HasMaxLength(60);
+
             // 1:1 relation Person - SystemUser
             builder
                 .HasOne(p => p.SystemUser)

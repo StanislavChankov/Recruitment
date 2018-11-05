@@ -10,14 +10,16 @@ namespace Synergy.Recruitment.Data.Models.Identity
 
         public long OrganizationId { get; set; }
 
+        public long RoleId { get; set; }
+
         public long SystemUserPasswordId { get; set; }
 
         public Person Person { get; set; }
 
+        public Role Role { get; set; }
+
         public Organization Organization { get; set; }
 
         public SystemUserPassword SystemUserPassword { get; set; }
-
-        public ICollection<RoleActionUser> RoleActionUsers { get; set; }
     }
 }

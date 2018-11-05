@@ -9,8 +9,8 @@ using NSubstitute;
 
 using Synergy.Recruitment.Api.Controllers;
 using Synergy.Recruitment.Core.Services;
-using Synergy.Recruitment.Data.Models;
 using Synergy.Recruitment.Rest.Models.Candidate;
+using Synergy.Recruitment.Test.Mocks;
 
 namespace Synergy.Recruitment.Test.Controllers
 {
@@ -35,7 +35,7 @@ namespace Synergy.Recruitment.Test.Controllers
         [TestMethod]
         public async Task GetAllAsync_200Ok()
         {
-            MockGetAllAsync();
+            _candidateService.MockGetAllAsync();
 
             IActionResult result = await _controller.GetAsync();
 
@@ -45,15 +45,6 @@ namespace Synergy.Recruitment.Test.Controllers
             Assert.IsInstanceOfType(candidateResult, typeof(IEnumerable<CandidateResponse>));
             Assert.IsTrue(candidateResult.Any());
         }
-
-        #endregion
-
-        #region Private Mock Methods
-
-        private void MockGetAllAsync(IEnumerable<Candidate> candidates = null)
-            => _candidateService
-                .GetAllAsync()
-                .Returns(candidates ?? Enumerable.Empty<Candidate>());
 
         #endregion
     }

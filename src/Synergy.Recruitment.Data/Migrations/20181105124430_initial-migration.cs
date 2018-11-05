@@ -5,22 +5,12 @@ using System.Collections.Generic;
 
 namespace Synergy.Recruitment.Data.Migrations
 {
-    public partial class base_schema : Migration
+    public partial class initialmigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropPrimaryKey(
-                name: "PK_Technologies",
-                table: "Technologies");
-
-            migrationBuilder.RenameTable(
-                name: "Technologies",
-                newName: "Technology");
-
-            migrationBuilder.AddPrimaryKey(
-                name: "PK_Technology",
-                table: "Technology",
-                column: "Id");
+            migrationBuilder.EnsureSchema(
+                name: "Identity");
 
             migrationBuilder.CreateTable(
                 name: "Company",
@@ -93,6 +83,85 @@ namespace Synergy.Recruitment.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Technology",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Technology", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Action",
+                schema: "Identity",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    ActionEnum = table.Column<short>(type: "smallint", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Action", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Organization",
+                schema: "Identity",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Organization", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Person",
+                schema: "Identity",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    BirthDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    EmailAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SystemUserId = table.Column<long>(type: "bigint", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Person", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Role",
+                schema: "Identity",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Role", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "City",
                 columns: table => new
                 {
@@ -155,6 +224,81 @@ namespace Synergy.Recruitment.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "RoleActionOrganization",
+                schema: "Identity",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    ActionId = table.Column<long>(type: "bigint", nullable: false),
+                    OrganizationId = table.Column<long>(type: "bigint", nullable: false),
+                    RoleId = table.Column<long>(type: "bigint", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RoleActionOrganization", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_RoleActionOrganization_Action_ActionId",
+                        column: x => x.ActionId,
+                        principalSchema: "Identity",
+                        principalTable: "Action",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_RoleActionOrganization_Organization_OrganizationId",
+                        column: x => x.OrganizationId,
+                        principalSchema: "Identity",
+                        principalTable: "Organization",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_RoleActionOrganization_Role_RoleId",
+                        column: x => x.RoleId,
+                        principalSchema: "Identity",
+                        principalTable: "Role",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SystemUser",
+                schema: "Identity",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    OrganizationId = table.Column<long>(type: "bigint", nullable: false),
+                    PersonId = table.Column<long>(type: "bigint", nullable: false),
+                    RoleId = table.Column<long>(type: "bigint", nullable: false),
+                    SystemUserPasswordId = table.Column<long>(type: "bigint", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SystemUser", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_SystemUser_Organization_OrganizationId",
+                        column: x => x.OrganizationId,
+                        principalSchema: "Identity",
+                        principalTable: "Organization",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_SystemUser_Person_PersonId",
+                        column: x => x.PersonId,
+                        principalSchema: "Identity",
+                        principalTable: "Person",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_SystemUser_Role_RoleId",
+                        column: x => x.RoleId,
+                        principalSchema: "Identity",
+                        principalTable: "Role",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "CandidateInfo",
                 columns: table => new
                 {
@@ -194,6 +338,57 @@ namespace Synergy.Recruitment.Data.Migrations
                         name: "FK_JobAdvertisement_Position_PositionId",
                         column: x => x.PositionId,
                         principalTable: "Position",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RoleActionUser",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    RoleActionOrganizationId = table.Column<long>(type: "bigint", nullable: false),
+                    SystemUserId = table.Column<long>(type: "bigint", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RoleActionUser", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_RoleActionUser_RoleActionOrganization_RoleActionOrganizationId",
+                        column: x => x.RoleActionOrganizationId,
+                        principalSchema: "Identity",
+                        principalTable: "RoleActionOrganization",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_RoleActionUser_SystemUser_SystemUserId",
+                        column: x => x.SystemUserId,
+                        principalSchema: "Identity",
+                        principalTable: "SystemUser",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SystemUserPassword",
+                schema: "Identity",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Password = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    PasswordSalt = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    SystemUserId = table.Column<long>(type: "bigint", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SystemUserPassword", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_SystemUserPassword_SystemUser_SystemUserId",
+                        column: x => x.SystemUserId,
+                        principalSchema: "Identity",
+                        principalTable: "SystemUser",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -359,6 +554,60 @@ namespace Synergy.Recruitment.Data.Migrations
                 name: "IX_Position_DepartmentId",
                 table: "Position",
                 column: "DepartmentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RoleActionUser_RoleActionOrganizationId",
+                table: "RoleActionUser",
+                column: "RoleActionOrganizationId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RoleActionUser_SystemUserId",
+                table: "RoleActionUser",
+                column: "SystemUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RoleActionOrganization_ActionId",
+                schema: "Identity",
+                table: "RoleActionOrganization",
+                column: "ActionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RoleActionOrganization_OrganizationId",
+                schema: "Identity",
+                table: "RoleActionOrganization",
+                column: "OrganizationId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RoleActionOrganization_RoleId",
+                schema: "Identity",
+                table: "RoleActionOrganization",
+                column: "RoleId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SystemUser_OrganizationId",
+                schema: "Identity",
+                table: "SystemUser",
+                column: "OrganizationId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SystemUser_PersonId",
+                schema: "Identity",
+                table: "SystemUser",
+                column: "PersonId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SystemUser_RoleId",
+                schema: "Identity",
+                table: "SystemUser",
+                column: "RoleId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SystemUserPassword_SystemUserId",
+                schema: "Identity",
+                table: "SystemUserPassword",
+                column: "SystemUserId",
+                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -376,6 +625,16 @@ namespace Synergy.Recruitment.Data.Migrations
                 name: "OrganizationProcess");
 
             migrationBuilder.DropTable(
+                name: "RoleActionUser");
+
+            migrationBuilder.DropTable(
+                name: "Technology");
+
+            migrationBuilder.DropTable(
+                name: "SystemUserPassword",
+                schema: "Identity");
+
+            migrationBuilder.DropTable(
                 name: "Company");
 
             migrationBuilder.DropTable(
@@ -391,10 +650,34 @@ namespace Synergy.Recruitment.Data.Migrations
                 name: "Process");
 
             migrationBuilder.DropTable(
+                name: "RoleActionOrganization",
+                schema: "Identity");
+
+            migrationBuilder.DropTable(
+                name: "SystemUser",
+                schema: "Identity");
+
+            migrationBuilder.DropTable(
                 name: "Position");
 
             migrationBuilder.DropTable(
                 name: "CandidateInfo");
+
+            migrationBuilder.DropTable(
+                name: "Action",
+                schema: "Identity");
+
+            migrationBuilder.DropTable(
+                name: "Organization",
+                schema: "Identity");
+
+            migrationBuilder.DropTable(
+                name: "Person",
+                schema: "Identity");
+
+            migrationBuilder.DropTable(
+                name: "Role",
+                schema: "Identity");
 
             migrationBuilder.DropTable(
                 name: "Department");
@@ -404,19 +687,6 @@ namespace Synergy.Recruitment.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Country");
-
-            migrationBuilder.DropPrimaryKey(
-                name: "PK_Technology",
-                table: "Technology");
-
-            migrationBuilder.RenameTable(
-                name: "Technology",
-                newName: "Technologies");
-
-            migrationBuilder.AddPrimaryKey(
-                name: "PK_Technologies",
-                table: "Technologies",
-                column: "Id");
         }
     }
 }

@@ -23,8 +23,14 @@ namespace Synergy.Recruitment.Data.Common.Configurations.Identity
 
             builder
                 .HasOne(su => su.Organization)
-                .WithMany(su => su.SystemUsers)
+                .WithMany(o => o.SystemUsers)
                 .HasForeignKey(su => su.OrganizationId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder
+                .HasOne(su => su.Role)
+                .WithMany(r => r.SystemUsers)
+                .HasForeignKey(su => su.RoleId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             // 1:1 relation SystemUsePassword - SystemUser
@@ -38,11 +44,6 @@ namespace Synergy.Recruitment.Data.Common.Configurations.Identity
                 .HasOne(su => su.Person)
                 .WithOne(p => p.SystemUser)
                 .HasForeignKey<SystemUser>(su => su.PersonId);
-
-            builder
-                .HasMany(su => su.RoleActionUsers)
-                .WithOne(su => su.SystemUser)
-                .HasForeignKey(su => su.SystemUserId);
         }
     }
 }

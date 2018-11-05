@@ -28,6 +28,6 @@ namespace Synergy.Recruitment.Business.Factories
 
         public static Expression<Func<Person, bool>> GetPersonById(long userId)
             => person
-                => person.Id == userId;
+                => person.SystemUserId == userId;
     }
 }

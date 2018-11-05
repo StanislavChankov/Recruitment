@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,6 +13,7 @@ using Synergy.Recruitment.Rest.Models.Technology;
 
 namespace Synergy.Recruitment.Api.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     public class TechnologyController : Controller
     {

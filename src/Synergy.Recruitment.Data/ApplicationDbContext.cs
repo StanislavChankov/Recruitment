@@ -70,9 +70,7 @@ namespace Synergy.Recruitment.Data.Data
         public DbSet<Role> Role { get; set; }
 
         public DbSet<RoleActionOrganization> RoleActionOrganization { get; set; }
-
-        public DbSet<RoleActionUser> RoleActionUser { get; set; }
-
+    
         public DbSet<SystemUser> SystemUser { get; set; }
 
         public DbSet<SystemUserPassword> SystemUserPassword { get; set; }
@@ -109,7 +107,6 @@ namespace Synergy.Recruitment.Data.Data
                 .ApplyConfiguration(new PersonEntityConfiguration())
                 .ApplyConfiguration(new RoleEntityConfiguration())
                 .ApplyConfiguration(new RoleActionOrganizationEntityConfiguration())
-                .ApplyConfiguration(new RoleActionUserEntityConfiguration())
                 .ApplyConfiguration(new SystemUserEntityConfiguration())
                 .ApplyConfiguration(new SystemUserPasswordEntityConfiguration());
 

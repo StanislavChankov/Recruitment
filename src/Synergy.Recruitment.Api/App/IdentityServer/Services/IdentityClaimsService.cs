@@ -1,6 +1,4 @@
-﻿using IdentityModel;
-
-using IsResources = IdentityServer4.Models.Resources;
+﻿using IsResources = IdentityServer4.Models.Resources;
 using IdentityServer4.Services;
 using IdentityServer4.Validation;
 

@@ -9,6 +9,7 @@ using Synergy.Recruitment.Data.Models.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq.Expressions;
+using System.Collections.Generic;
 
 namespace Synergy.Recruitment.Data.Repositories.Identity
 {
@@ -33,5 +34,13 @@ namespace Synergy.Recruitment.Data.Repositories.Identity
                     .Where(selectionExp)
                     .Select(projectionExp)
                     .FirstOrDefaultAsync();
+
+        public Task<List<IEnumerable<short>>> GetActionsAsync(
+            long userId,
+            Expression<Func<SystemUser, IEnumerable<short>>> projectionExp)
+            => Queryable
+                .Where(x => x.Id == userId)
+                .Select(projectionExp)
+                .ToListAsync();
     }
 }

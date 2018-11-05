@@ -236,20 +236,22 @@ namespace Synergy.Recruitment.Data.Common.Abstract
             Context.Entry(Select(key)).CurrentValues.SetValues(item);
         }
 
-        //public async Task UpdateAsync(T item, object key)
-        //{
-        //    Update(item, key);
+        public async Task UpdateAsync(T item, object key)
+        {
+            Update(item, key);
 
-        //    await Task.CompletedTask;
-        //}
+            await Task.CompletedTask;
+        }
 
-        public Task UpdateAsync(T item, object key) => UpdateAsync(item, key);
+        // public Task UpdateAsync(T item, object key) => UpdateAsync(item, key);
 
         public async Task<IEnumerable<TEntityResult>> ListAsync<TEntityResult>(Expression<Func<T, TEntityResult>> select)
             => await QueryableSelect(select).ToListAsync();
 
-        public async Task<IEnumerable<TEntityResult>> ListAsync<TEntityResult>(Expression<Func<T, bool>> whereExpression, Expression<Func<T, TEntityResult>> selectExpression)
-            => await QueryableWhereSelect(whereExpression, selectExpression).ToListAsync();
+        public async Task<IEnumerable<TEntityResult>> ListAsync<TEntityResult>(
+            Expression<Func<T, bool>> whereExpression,
+            Expression<Func<T, TEntityResult>> selectExpression)
+                => await QueryableWhereSelect(whereExpression, selectExpression).ToListAsync();
 
         public Task<TEntityResult> SelectFirstOrDefaultAsync<TEntityResult>(
             Expression<Func<T, TEntityResult>> selectExpression,

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 
 using Synergy.Recruitment.Business.Models.Users;
@@ -22,6 +24,13 @@ namespace Synergy.Recruitment.Business.Factories
                     PasswordHash = user.SystemUserPassword.Password,
                     PasswordSalt = user.SystemUserPassword.PasswordSalt,
                 };
+
+
+        public static Expression<Func<SystemUser, IEnumerable<short>>> GetActions
+            => user
+                => user.Role.RoleActionOrganizations
+                    .Where(rao => rao.OrganizationId == user.OrganizationId)
+                    .Select(rao => rao.Action.ActionEnum);
 
         public static Expression<Func<SystemUser, bool>> GetUserByEmail(string emailAddress, bool? isActive)
             => user

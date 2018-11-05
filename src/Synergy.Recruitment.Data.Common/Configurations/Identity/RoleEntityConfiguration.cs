@@ -21,11 +21,18 @@ namespace Synergy.Recruitment.Data.Common.Configurations.Identity
 
             builder.HasKey(r => r.Id);
 
+            builder.Property(r => r.Description).HasMaxLength(200);
+
             // Optional
             builder
                 .HasMany(r => r.RoleActionOrganizations)
-                .WithOne(r => r.Role)
+                .WithOne(rao => rao.Role)
                 .HasForeignKey(r => r.RoleId);
+
+            builder
+                .HasMany(r => r.SystemUsers)
+                .WithOne(su => su.Role)
+                .HasForeignKey(su => su.RoleId);
         }
     }
 }
