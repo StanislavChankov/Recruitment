@@ -15,6 +15,7 @@ import { CandidateService, DateTimeService, ErrorService } from './services/inde
 import { AuthService } from './auth/auth.service';
 import { TokenStorage, UserStorage } from './storages';
 import { TokenInterceptor } from './middlewares/token-interceptor';
+import { AuthGuardService } from './auth/auth-guard.service';
 
 const socialLinks = [
   {
@@ -117,6 +118,7 @@ export const businessServices = [
   ErrorService,
   DateTimeService,
   AuthService,
+  AuthGuardService,
 ];
 
 export const storages = [

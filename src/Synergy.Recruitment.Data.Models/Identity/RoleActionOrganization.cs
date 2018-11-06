@@ -17,7 +17,5 @@ namespace Synergy.Recruitment.Data.Models.Identity
         public Action Action { get; set; }
 
         public Organization Organization { get; set; }
-
-        public ICollection<RoleActionUser> RoleActionUsers { get; set; }
     }
 }

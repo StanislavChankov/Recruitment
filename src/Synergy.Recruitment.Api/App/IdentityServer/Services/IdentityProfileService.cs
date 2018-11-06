@@ -8,6 +8,7 @@ using IdentityModel;
 
 using IdentityServer4.Models;
 using IdentityServer4.Services;
+
 using Synergy.Recruitment.Business.Models.Person;
 using Synergy.Recruitment.Core.Extensions;
 using Synergy.Recruitment.Core.Services.Identity;

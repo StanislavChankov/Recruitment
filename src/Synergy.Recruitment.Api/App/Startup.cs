@@ -1,7 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IdentityModel.Tokens.Jwt;
-
+using System.Linq;
 using IdentityModel;
 using IdentityModel.AspNetCore.OAuth2Introspection;
 
@@ -88,11 +89,25 @@ namespace Synergy.Recruitment.Api.App
             services
                 .AddDbContextPool<ApplicationDbContext>(builder =>
                 {
-                    builder.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
                     builder.UseLoggerFactory(new LoggerFactory(new[] { new DebugLoggerProvider()}));
+                    builder.UseSqlServer(Configuration.GetConnectionString("LocalConnection"));
                 });
 
-            services.AddSwaggerGen(c => c.SwaggerDoc("v1", new Info { Title = "recruitment api", Version = "v1" }));
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info { Title = "Recruitment api", Version = "v1" });
+                c.AddSecurityDefinition("Bearer", new ApiKeyScheme
+                {
+                    Description = "JWT Authorization header",
+                    Name = "Authorization",
+                    In = "header",
+                    Type = "apiKey"
+                });
+                c.AddSecurityRequirement(new Dictionary<string, IEnumerable<string>>
+                {
+                    { "Bearer", Enumerable.Empty<string>() }
+                });
+            });
 
             services.AddAuthorization();
 

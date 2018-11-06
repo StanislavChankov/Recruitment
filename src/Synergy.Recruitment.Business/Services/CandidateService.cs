@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Threading.Tasks;
 
-using Synergy.Recruitment.Business.Factories;
 using Synergy.Recruitment.Core.Services;
 using Synergy.Recruitment.Data.Models;
 

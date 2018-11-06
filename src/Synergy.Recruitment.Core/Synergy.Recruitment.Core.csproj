@@ -12,9 +12,5 @@
     <ProjectReference Include="..\Synergy.Recruitment.Business.Models\Synergy.Recruitment.Business.Models.csproj" />
     <ProjectReference Include="..\Synergy.Recruitment.Data.Models\Synergy.Recruitment.Data.Models.csproj" />
   </ItemGroup>
-  
-  <ItemGroup>
-    <Folder Include="Identity\" />
-  </ItemGroup>
 
 </Project>

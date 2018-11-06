@@ -21,6 +21,8 @@ namespace Synergy.Recruitment.Data.Common.Configurations.Identity
 
             builder.HasKey(a => a.Id);
 
+            builder.Property(a => a.Description).HasMaxLength(200);
+
             // Optional
             builder
                 .HasMany(a => a.RoleActionOrganizations)

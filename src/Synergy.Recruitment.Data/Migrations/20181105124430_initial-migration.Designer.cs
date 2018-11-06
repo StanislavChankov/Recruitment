@@ -11,8 +11,8 @@ using System;
 namespace Synergy.Recruitment.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20181029105253_SystemUser_Organization_FK")]
-    partial class SystemUser_Organization_FK
+    [Migration("20181105124430_initial-migration")]
+    partial class initialmigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -184,6 +184,8 @@ namespace Synergy.Recruitment.Data.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<short>("ActionEnum");
+
                     b.Property<string>("Description");
 
                     b.Property<bool>("IsActive");
@@ -221,6 +223,8 @@ namespace Synergy.Recruitment.Data.Migrations
                     b.Property<bool>("IsActive");
 
                     b.Property<string>("LastName");
+
+                    b.Property<long>("SystemUserId");
 
                     b.HasKey("Id");
 
@@ -280,7 +284,7 @@ namespace Synergy.Recruitment.Data.Migrations
 
                     b.HasIndex("SystemUserId");
 
-                    b.ToTable("RoleActionUser","Identity");
+                    b.ToTable("RoleActionUser");
                 });
 
             modelBuilder.Entity("Synergy.Recruitment.Data.Models.Identity.SystemUser", b =>
@@ -292,11 +296,18 @@ namespace Synergy.Recruitment.Data.Migrations
 
                     b.Property<long>("PersonId");
 
+                    b.Property<long>("RoleId");
+
+                    b.Property<long>("SystemUserPasswordId");
+
                     b.HasKey("Id");
 
                     b.HasIndex("OrganizationId");
 
-                    b.HasIndex("PersonId");
+                    b.HasIndex("PersonId")
+                        .IsUnique();
+
+                    b.HasIndex("RoleId");
 
                     b.ToTable("SystemUser","Identity");
                 });
@@ -318,7 +329,8 @@ namespace Synergy.Recruitment.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("SystemUserId");
+                    b.HasIndex("SystemUserId")
+                        .IsUnique();
 
                     b.ToTable("SystemUserPassword","Identity");
                 });
@@ -536,16 +548,21 @@ namespace Synergy.Recruitment.Data.Migrations
                         .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Synergy.Recruitment.Data.Models.Identity.Person", "Person")
-                        .WithMany("SystemUsers")
-                        .HasForeignKey("PersonId")
+                        .WithOne("SystemUser")
+                        .HasForeignKey("Synergy.Recruitment.Data.Models.Identity.SystemUser", "PersonId")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Synergy.Recruitment.Data.Models.Identity.Role", "Role")
+                        .WithMany("SystemUsers")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("Synergy.Recruitment.Data.Models.Identity.SystemUserPassword", b =>
                 {
                     b.HasOne("Synergy.Recruitment.Data.Models.Identity.SystemUser", "SystemUser")
-                        .WithMany("SystemUserPasswords")
-                        .HasForeignKey("SystemUserId")
+                        .WithOne("SystemUserPassword")
+                        .HasForeignKey("Synergy.Recruitment.Data.Models.Identity.SystemUserPassword", "SystemUserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
