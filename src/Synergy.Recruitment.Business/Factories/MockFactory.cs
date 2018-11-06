@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using Synergy.Recruitment.Core.Extensions;
 using Synergy.Recruitment.Data.Models;
 using Synergy.Recruitment.Rest.Models.Candidate;
@@ -9,6 +10,7 @@ namespace Synergy.Recruitment.Business.Factories
     /// <summary>
     /// Contains static mock methods.
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public static class MockFactory
     {
         public static IEnumerable<Technology> GetTechnologies()

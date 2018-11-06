@@ -29,7 +29,8 @@ namespace Synergy.Recruitment.Business.Factories
         public static Expression<Func<SystemUser, IEnumerable<short>>> GetActions
             => user
                 => user.Role.RoleActionOrganizations
-                    .Where(rao => rao.OrganizationId == user.OrganizationId)
+                    .Where(rao => user.Person.IsActive
+                            && rao.OrganizationId == user.OrganizationId)
                     .Select(rao => rao.Action.ActionEnum);
 
         public static Expression<Func<SystemUser, bool>> GetUserByEmail(string emailAddress, bool? isActive)

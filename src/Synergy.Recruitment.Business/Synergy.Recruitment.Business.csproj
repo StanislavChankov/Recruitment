@@ -4,9 +4,12 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup Label="Package References">
+    <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="2.0.0" />
+  </ItemGroup>
+  
   <ItemGroup Label="Project References">
     <ProjectReference Include="..\Synergy.Recruitment.Core\Synergy.Recruitment.Core.csproj" />
     <ProjectReference Include="..\Synergy.Recruitment.Rest.Models\Synergy.Recruitment.Rest.Models.csproj" />
   </ItemGroup>
-
 </Project>

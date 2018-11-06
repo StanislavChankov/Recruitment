@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+
 using IdentityModel;
 using IdentityModel.AspNetCore.OAuth2Introspection;
 
@@ -24,6 +25,7 @@ using Swashbuckle.AspNetCore.Swagger;
 
 using Synergy.Recruitment.Api.App.IdentityServer.Services;
 using Synergy.Recruitment.Api.App.IdentityServer.Stores;
+using Synergy.Recruitment.Business.Authorization;
 using Synergy.Recruitment.Data.Data;
 using Synergy.Recruitment.Resources;
 
@@ -49,6 +51,8 @@ namespace Synergy.Recruitment.Api.App
             services.AddTransient<IProfileService, IdentityProfileService>();
             AddIdentityDependencies(services);
 
+            services.AddMemoryCache();
+
             services
                 .AddIdentityServer()
                 .AddDeveloperSigningCredential()
@@ -62,6 +66,8 @@ namespace Synergy.Recruitment.Api.App
                                             p.AllowAnyOrigin()
                                             .AllowAnyMethod()
                                             .AllowAnyHeader()));
+
+            services.AddAuthorizationHandler<ApiAuthorizationProvider>();
 
             services
                 .AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
@@ -93,25 +99,13 @@ namespace Synergy.Recruitment.Api.App
                     builder.UseSqlServer(Configuration.GetConnectionString("LocalConnection"));
                 });
 
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new Info { Title = "Recruitment api", Version = "v1" });
-                c.AddSecurityDefinition("Bearer", new ApiKeyScheme
-                {
-                    Description = "JWT Authorization header",
-                    Name = "Authorization",
-                    In = "header",
-                    Type = "apiKey"
-                });
-                c.AddSecurityRequirement(new Dictionary<string, IEnumerable<string>>
-                {
-                    { "Bearer", Enumerable.Empty<string>() }
-                });
-            });
+            AddSwagger(services);
 
             services.AddAuthorization();
 
             services.AddMvc();
+
+            services.AddAuthorizationHandler<AuthorizationProvider, RoleActions>();
 
             return services.CreateDIProvider();
         }
@@ -132,11 +126,37 @@ namespace Synergy.Recruitment.Api.App
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Recruitment API V1"));
         }
 
+        #region Private Methods
+    
+        private static void AddSwagger(IServiceCollection services)
+        {
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info { Title = "Recruitment api", Version = "v1" });
+
+                c.AddSecurityDefinition("Bearer", new ApiKeyScheme
+                {
+                    Description = "JWT Authorization header",
+                    Name = "Authorization",
+                    In = "header",
+                    Type = "apiKey"
+                });
+
+                c.AddSecurityRequirement(new Dictionary<string, IEnumerable<string>>
+                {
+                    { "Bearer", Enumerable.Empty<string>() }
+                });
+            });
+        }
+
         private static void AddIdentityDependencies(IServiceCollection services)
         {
             services.AddTransient<IClaimsService, IdentityClaimsService>();
             services.AddSingleton<IResourceStore, ResourcesStore>();
             services.AddSingleton<IClientStore, ClientStore>();
         }
+
+        #endregion
+
     }
 }

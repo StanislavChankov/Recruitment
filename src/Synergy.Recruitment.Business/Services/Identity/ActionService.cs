@@ -1,12 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using System.Threading.Tasks;
+
+using Microsoft.Extensions.Caching.Memory;
 
 using Synergy.Recruitment.Business.Factories;
 using Synergy.Recruitment.Core.Extensions;
 using Synergy.Recruitment.Core.Repositories.Identity;
 using Synergy.Recruitment.Core.Services.Identity;
+using Synergy.Recruitment.Resources;
 
 namespace Synergy.Recruitment.Business.Services.Identity
 {
@@ -14,18 +18,28 @@ namespace Synergy.Recruitment.Business.Services.Identity
     {
         private readonly IUserRepository _userRepository;
 
-        public ActionService(IUserRepository userRepository)
+        private readonly IMemoryCache _memoryCache;
+
+        public ActionService(
+            IUserRepository userRepository,
+            IMemoryCache memoryCache)
         {
             _userRepository = userRepository;
+            _memoryCache = memoryCache;
         }
 
-        public async Task<BigInteger> GetActiveUserActionsAsync(long userId)
-        {
-            var actions = await _userRepository.GetActionsAsync(userId, UserFactory.GetActions);
-            
-            IEnumerable<short> flattedActions = actions.SelectMany(a => a);
+        public Task<BigInteger> GetActiveUserActionsAsync(long userId)
+            => _memoryCache.GetOrCreateAsync(
+                string.Format(CacheKeys.Actions, userId),
+                async entry =>
+                {
+                    entry.SlidingExpiration = TimeSpan.FromMinutes(10);
 
-            return flattedActions.CalculateActionsInteger();
-        }
+                    var actions = await _userRepository.GetActionsAsync(userId, UserFactory.GetActions);
+
+                    IEnumerable<short> flattedActions = actions.SelectMany(a => a);
+
+                    return flattedActions.CalculateActionsInteger();
+                });
     }
 }

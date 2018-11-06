@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
-
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-
+using Synergy.Recruitment.Business.Authorization;
 using Synergy.Recruitment.Core.Services.Identity;
 
 namespace Synergy.Recruitment.Api.Controllers
@@ -39,6 +39,7 @@ namespace Synergy.Recruitment.Api.Controllers
         }
 
         // DELETE api/values/5
+        [Authorize(nameof(RoleActions.ViewCandidates))]
         [HttpDelete("{id}")]
         public void Delete(int id)
         {

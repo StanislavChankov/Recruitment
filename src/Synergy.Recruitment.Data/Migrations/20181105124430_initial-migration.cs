@@ -1,10 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata;
+﻿using System;
+using System.Diagnostics.CodeAnalysis;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using System;
-using System.Collections.Generic;
 
 namespace Synergy.Recruitment.Data.Migrations
 {
+    [ExcludeFromCodeCoverage]
     public partial class initialmigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
