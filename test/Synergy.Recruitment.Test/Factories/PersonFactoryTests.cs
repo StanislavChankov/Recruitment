@@ -48,7 +48,7 @@ namespace Synergy.Recruitment.Test.Factories
                     new Tuple<bool, Person>
                     (
                         true,
-                        new Person { Id = 1 }
+                        new Person { SystemUserId = 1 }
                     )
                 },
                 new object[]
@@ -56,7 +56,7 @@ namespace Synergy.Recruitment.Test.Factories
                     new Tuple<bool, Person>
                     (
                         false,
-                        new Person { Id = 2 }
+                        new Person { SystemUserId = 2 }
                     ),
                 },
                 new object[]
@@ -64,7 +64,7 @@ namespace Synergy.Recruitment.Test.Factories
                     new Tuple<bool, Person>
                     (
                         false,
-                        new Person { Id = 0 }
+                        new Person { SystemUserId = 0 }
                     ),
                 },
                 new object[]
@@ -72,7 +72,7 @@ namespace Synergy.Recruitment.Test.Factories
                     new Tuple<bool, Person>
                     (
                         false,
-                        new Person { Id = -1 }
+                        new Person { SystemUserId = -1 }
                     ),
                 }
             };
