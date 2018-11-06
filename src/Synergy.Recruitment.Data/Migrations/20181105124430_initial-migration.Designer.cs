@@ -11,7 +11,6 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Synergy.Recruitment.Data.Migrations
 {
-    [ExcludeFromCodeCoverage]
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("20181105124430_initial-migration")]
     partial class initialmigration
