@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Diagnostics.CodeAnalysis;
+using Microsoft.EntityFrameworkCore;
 
 using Synergy.Recruitment.Data.Common.Configurations;
 using Synergy.Recruitment.Data.Common.Configurations.Identity;
@@ -11,6 +12,7 @@ namespace Synergy.Recruitment.Data.Data
     /// The current <see cref="DbContext"/> of the application.
     /// </summary>
     /// <seealso cref="Microsoft.EntityFrameworkCore.DbContext"/>
+    [ExcludeFromCodeCoverage]
     public sealed class ApplicationDbContext : DbContext
     {
         #region Constructors

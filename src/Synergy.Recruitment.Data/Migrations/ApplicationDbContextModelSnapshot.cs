@@ -7,9 +7,11 @@ using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Storage.Internal;
 using Synergy.Recruitment.Data.Data;
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Synergy.Recruitment.Data.Migrations
 {
+    [ExcludeFromCodeCoverage]
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {

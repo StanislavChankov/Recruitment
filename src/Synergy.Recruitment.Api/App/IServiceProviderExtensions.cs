@@ -6,7 +6,7 @@ using LightInject.Microsoft.DependencyInjection;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
-
+using Synergy.Recruitment.Business.Authorization;
 using Synergy.Recruitment.Resources;
 
 namespace Synergy.Recruitment.Api.App

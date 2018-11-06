@@ -7,6 +7,7 @@ using Synergy.Recruitment.Data.Data;
 using Synergy.Recruitment.Data.Models.Identity;
 
 using Microsoft.EntityFrameworkCore;
+
 using System;
 using System.Linq.Expressions;
 using System.Collections.Generic;
