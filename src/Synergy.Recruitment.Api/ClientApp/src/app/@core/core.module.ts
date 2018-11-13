@@ -62,6 +62,23 @@ export const NB_CORE_PROVIDERS = [
         register: {
           socialLinks: socialLinks,
         },
+        validation: {
+          firstname: {
+            minLength: 2,
+            maxLength: 15,
+            required: true,
+          },
+          lastname: {
+            minLength: 2,
+            maxLength: 15,
+            required: true,
+          },
+          organization: {
+            minLength: 3,
+            maxLength: 30,
+            required: true,
+          },
+        },
       },
     strategies: [
       [AuthService,

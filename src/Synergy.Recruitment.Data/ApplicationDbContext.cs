@@ -77,6 +77,8 @@ namespace Synergy.Recruitment.Data.Data
 
         public DbSet<SystemUserPassword> SystemUserPassword { get; set; }
 
+        public DbSet<DefaultRoleAction> DefaultRoleAction { get; set; }
+
         #endregion
 
         #region Protected Methods
@@ -110,7 +112,8 @@ namespace Synergy.Recruitment.Data.Data
                 .ApplyConfiguration(new RoleEntityConfiguration())
                 .ApplyConfiguration(new RoleActionOrganizationEntityConfiguration())
                 .ApplyConfiguration(new SystemUserEntityConfiguration())
-                .ApplyConfiguration(new SystemUserPasswordEntityConfiguration());
+                .ApplyConfiguration(new SystemUserPasswordEntityConfiguration())
+                .ApplyConfiguration(new DefaultRoleActionConfiguration());
 
         #endregion
     }

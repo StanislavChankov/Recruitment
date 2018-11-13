@@ -43,5 +43,7 @@ namespace Synergy.Recruitment.Data.Repositories.Identity
                 .Where(x => x.Id == userId)
                 .Select(projectionExp)
                 .ToListAsync();
+
+        public Task InsertAsync(SystemUser user) => AddAsync(user);
     }
 }

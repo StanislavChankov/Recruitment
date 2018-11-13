@@ -28,9 +28,9 @@ namespace Synergy.Recruitment.Data.Repositories.Identity
 
         #region Public Methods
 
-        public Task<TEntityResult> GetByUserIdAsync<TEntityResult>(
+        public Task<TResult> GetByUserIdAsync<TResult>(
             Expression<Func<Person, bool>> selectExp,
-            Expression<Func<Person, TEntityResult>> projectionExp)
+            Expression<Func<Person, TResult>> projectionExp)
                 => Queryable
                     .Where(selectExp)
                     .Select(projectionExp)

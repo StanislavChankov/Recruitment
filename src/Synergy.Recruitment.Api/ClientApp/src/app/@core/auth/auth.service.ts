@@ -17,9 +17,9 @@ import { apiUrls } from '../../../environments/environment';
 import { TokenResponse, PersonInsertRequest, UserInfo } from '../../@shared/data-models';
 import { AbstractAuthService } from '../abstract/abstract-auth.service';
 import { AuthConstants, ErrorMessagesConstants, StorageConstants } from '../../@shared/constants';
-import { ActionTypes } from '../../@shared/enums';
 import { UserStorage, TokenStorage } from '../storages/index';
-import { THROW_IF_NOT_FOUND } from '@angular/core/src/di/injector';
+import { UserFactory } from '../../@shared/factories/user-factory';
+import { debug } from 'util';
 
 @Injectable()
 export class AuthService
@@ -36,6 +36,7 @@ export class AuthService
     }
 
     public authenticate(login: any): Observable<NbAuthResult> {
+        debugger;
         let headers: HttpHeaders = new HttpHeaders();
         localStorage.removeItem(StorageConstants.accessToken);
         this.userStorage.clearAll();
@@ -88,17 +89,16 @@ export class AuthService
     }
 
     public register(data?: any): Observable<NbAuthResult> {
-
-        const person = { emailAddress: data.email, password: data.password } as PersonInsertRequest;
+        const userOrgInsert = UserFactory.getRequest(data);
 
         let headers: HttpHeaders = new HttpHeaders();
         headers = headers.set('Content-Type', 'application/json' );
 
         return this.http
-        .post(apiUrls.identity.register, person, { headers })
-        .map(res => {
-            return new NbAuthResult(true, undefined);
-        });
+                .post(apiUrls.identity.register, userOrgInsert, { headers })
+                .map(res => {
+                    return new NbAuthResult(true, undefined, 'pages/iot-dashboard');
+                });
     }
 
     public authorize(): Observable<NbAuthResult> {

@@ -39,5 +39,11 @@
         public const string SETTINGS_KEY_IDENITY_URL = "IdentityServerLocation";
 
         #endregion
+
+        #region Roles
+
+        public const string DirectorRole = "DIR";
+
+        #endregion
     }
 }

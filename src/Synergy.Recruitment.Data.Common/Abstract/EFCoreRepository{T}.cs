@@ -1,9 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+
+using Microsoft.EntityFrameworkCore;
+
+using Synergy.Recruitment.Data.Models.Abstract;
 
 namespace Synergy.Recruitment.Data.Common.Abstract
 {
@@ -13,8 +16,9 @@ namespace Synergy.Recruitment.Data.Common.Abstract
     /// <typeparam name="T">The type of the entity.</typeparam>
     /// <seealso cref="Synergy.Recruitment.Data.Common.Abstract.IRelationalRepository{T}" />
     /// <seealso cref="Synergy.Recruitment.Data.Common.Abstract.IRepository{T}" />
+    /// <seealso cref="BaseEntity" />
     public abstract class EFCoreRepository<T> : IRelationalRepository<T>
-        where T : class
+        where T : BaseEntity
     {
         #region Constructors
 
@@ -42,6 +46,8 @@ namespace Synergy.Recruitment.Data.Common.Abstract
         public async Task AddAsync(T item)
         {
             await Set.AddAsync(item).ConfigureAwait(false);
+
+            await Context.SaveChangesAsync();
         }
 
         public void AddRange(IEnumerable<T> list) => Set.AddRange(list);
@@ -49,6 +55,8 @@ namespace Synergy.Recruitment.Data.Common.Abstract
         public async Task AddRangeAsync(IEnumerable<T> list)
         {
             await Set.AddRangeAsync(list).ConfigureAwait(false);
+
+            await Context.SaveChangesAsync();
         }
 
         public bool Any() => Set.Any();

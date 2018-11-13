@@ -7,11 +7,9 @@ using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Storage.Internal;
 using Synergy.Recruitment.Data.Data;
 using System;
-using System.Diagnostics.CodeAnalysis;
 
 namespace Synergy.Recruitment.Data.Migrations
 {
-    [ExcludeFromCodeCoverage]
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
@@ -187,7 +185,8 @@ namespace Synergy.Recruitment.Data.Migrations
 
                     b.Property<short>("ActionEnum");
 
-                    b.Property<string>("Description");
+                    b.Property<string>("Description")
+                        .HasMaxLength(200);
 
                     b.Property<bool>("IsActive");
 
@@ -196,6 +195,24 @@ namespace Synergy.Recruitment.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Action","Identity");
+                });
+
+            modelBuilder.Entity("Synergy.Recruitment.Data.Models.Identity.DefaultRoleAction", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<long>("ActionId");
+
+                    b.Property<long>("RoleId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ActionId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("DefaultRoleAction","Identity");
                 });
 
             modelBuilder.Entity("Synergy.Recruitment.Data.Models.Identity.Organization", b =>
@@ -207,6 +224,10 @@ namespace Synergy.Recruitment.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Name")
+                        .IsUnique()
+                        .HasFilter("[Name] IS NOT NULL");
+
                     b.ToTable("Organization","Identity");
                 });
 
@@ -217,17 +238,24 @@ namespace Synergy.Recruitment.Data.Migrations
 
                     b.Property<DateTime?>("BirthDate");
 
-                    b.Property<string>("EmailAddress");
+                    b.Property<string>("EmailAddress")
+                        .IsRequired()
+                        .HasMaxLength(60);
 
-                    b.Property<string>("FirstName");
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(60);
 
                     b.Property<bool>("IsActive");
 
-                    b.Property<string>("LastName");
-
-                    b.Property<long>("SystemUserId");
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(60);
 
                     b.HasKey("Id");
+
+                    b.HasIndex("EmailAddress")
+                        .IsUnique();
 
                     b.ToTable("Person","Identity");
                 });
@@ -237,13 +265,22 @@ namespace Synergy.Recruitment.Data.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Description");
+                    b.Property<string>("Code")
+                        .HasMaxLength(3);
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(200);
 
                     b.Property<bool>("IsActive");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .HasMaxLength(60);
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Code")
+                        .IsUnique()
+                        .HasFilter("[Code] IS NOT NULL");
 
                     b.ToTable("Role","Identity");
                 });
@@ -270,36 +307,20 @@ namespace Synergy.Recruitment.Data.Migrations
                     b.ToTable("RoleActionOrganization","Identity");
                 });
 
-            modelBuilder.Entity("Synergy.Recruitment.Data.Models.Identity.RoleActionUser", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<long>("RoleActionOrganizationId");
-
-                    b.Property<long>("SystemUserId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RoleActionOrganizationId");
-
-                    b.HasIndex("SystemUserId");
-
-                    b.ToTable("RoleActionUser");
-                });
-
             modelBuilder.Entity("Synergy.Recruitment.Data.Models.Identity.SystemUser", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("CreatedOnUtc");
+
+                    b.Property<DateTime?>("ModifiedOnUtc");
 
                     b.Property<long>("OrganizationId");
 
                     b.Property<long>("PersonId");
 
                     b.Property<long>("RoleId");
-
-                    b.Property<long>("SystemUserPasswordId");
 
                     b.HasKey("Id");
 
@@ -510,6 +531,19 @@ namespace Synergy.Recruitment.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("Synergy.Recruitment.Data.Models.Identity.DefaultRoleAction", b =>
+                {
+                    b.HasOne("Synergy.Recruitment.Data.Models.Identity.Action", "Action")
+                        .WithMany("DefaultRoleActions")
+                        .HasForeignKey("ActionId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Synergy.Recruitment.Data.Models.Identity.Role", "Role")
+                        .WithMany("DefaultRoleActions")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("Synergy.Recruitment.Data.Models.Identity.RoleActionOrganization", b =>
                 {
                     b.HasOne("Synergy.Recruitment.Data.Models.Identity.Action", "Action")
@@ -525,19 +559,6 @@ namespace Synergy.Recruitment.Data.Migrations
                     b.HasOne("Synergy.Recruitment.Data.Models.Identity.Role", "Role")
                         .WithMany("RoleActionOrganizations")
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Synergy.Recruitment.Data.Models.Identity.RoleActionUser", b =>
-                {
-                    b.HasOne("Synergy.Recruitment.Data.Models.Identity.RoleActionOrganization", "RoleActionOrganization")
-                        .WithMany("RoleActionUsers")
-                        .HasForeignKey("RoleActionOrganizationId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Synergy.Recruitment.Data.Models.Identity.SystemUser", "SystemUser")
-                        .WithMany("RoleActionUsers")
-                        .HasForeignKey("SystemUserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

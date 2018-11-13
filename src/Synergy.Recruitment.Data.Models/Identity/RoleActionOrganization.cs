@@ -1,11 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using Synergy.Recruitment.Data.Models.Abstract;
 
 namespace Synergy.Recruitment.Data.Models.Identity
 {
-    public class RoleActionOrganization
+    public class RoleActionOrganization : BaseEntity
     {
-        public long Id { get; set; }
-
         public long RoleId { get; set; }
 
         public long ActionId { get; set; }

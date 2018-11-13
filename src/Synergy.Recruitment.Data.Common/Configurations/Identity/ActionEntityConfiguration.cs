@@ -28,6 +28,11 @@ namespace Synergy.Recruitment.Data.Common.Configurations.Identity
                 .HasMany(a => a.RoleActionOrganizations)
                 .WithOne(a => a.Action)
                 .HasForeignKey(a => a.ActionId);
+
+            builder
+                .HasMany(a => a.DefaultRoleActions)
+                .WithOne(dro => dro.Action)
+                .HasForeignKey(dro => dro.ActionId);
         }
     }
 }

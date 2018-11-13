@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
+using Synergy.Recruitment.Data.Models.Abstract;
 
 namespace Synergy.Recruitment.Data.Models.Identity
 {
-    public class Person
+    public class Person : BaseEntity
     {
-        public long Id { get; set; }
-
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
@@ -16,9 +14,7 @@ namespace Synergy.Recruitment.Data.Models.Identity
         public string EmailAddress { get; set; }
 
         public bool IsActive { get; set; }
-
-        public long SystemUserId { get; set; }
-
+        //public long SystemUserId { get; set; }
         public SystemUser SystemUser { get; set; }
     }
 }

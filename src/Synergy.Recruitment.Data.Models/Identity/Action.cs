@@ -15,5 +15,7 @@ namespace Synergy.Recruitment.Data.Models.Identity
         public bool IsActive { get; set; }
 
         public ICollection<RoleActionOrganization> RoleActionOrganizations { get; set; }
+
+        public ICollection<DefaultRoleAction> DefaultRoleActions { get; set; }
     }
 }

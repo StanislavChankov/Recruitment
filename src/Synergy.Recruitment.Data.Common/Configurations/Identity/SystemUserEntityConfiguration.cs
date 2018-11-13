@@ -34,10 +34,10 @@ namespace Synergy.Recruitment.Data.Common.Configurations.Identity
                 .OnDelete(DeleteBehavior.Restrict);
 
             // 1:1 relation SystemUsePassword - SystemUser
-            builder
-                .HasOne(su => su.SystemUserPassword)
-                .WithOne(p => p.SystemUser)
-                .HasForeignKey<SystemUser>(su => su.SystemUserPasswordId);
+            //builder
+            //    .HasOne(su => su.SystemUserPassword)
+            //    .WithOne(p => p.SystemUser)
+            //    .HasForeignKey<SystemUser>(su => su.SystemUserPasswordId);
 
             // 1:1 relation SystemUser - Person
             builder

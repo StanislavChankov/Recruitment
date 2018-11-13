@@ -6,8 +6,4 @@ export class PersonInsertRequest {
     public firstName: string;
 
     public lastName: string;
-
-    public middleName: string;
-
-    public birthDate: Date;
 }

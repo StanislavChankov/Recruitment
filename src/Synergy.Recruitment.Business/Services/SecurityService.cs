@@ -2,7 +2,8 @@
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-
+using Synergy.Recruitment.Business.Factories;
+using Synergy.Recruitment.Business.Models.Authorization;
 using Synergy.Recruitment.Core.Services;
 
 namespace Synergy.Recruitment.Business.Services
@@ -46,12 +47,23 @@ namespace Synergy.Recruitment.Business.Services
             return saltedHashString;
         }
 
+        public HashedPassword GetHashedPassword(string plainText)
+        {
+            plainText = plainText ?? throw new ArgumentNullException(nameof(plainText));
+
+            string salt = GenerateSalt();
+
+            byte[] passwordBytes = GenerateSaltedHash(plainText, salt);
+
+            string saltedHashString = Convert.ToBase64String(passwordBytes);
+
+            return AuthorizationFactory.GetHashedPassword(saltedHashString, salt);
+        }
+
         /// See <see cref="ISecurityService" /> for more.
         public string GenerateRandomPassword()
-        {
-            return new string(Enumerable.Repeat(PASSWORD_CHARS, RANDOM_PASSWORD_LENGTH)
-            .Select(s => s[_random.Next(s.Length)]).ToArray());
-        }
+            => new string(Enumerable.Repeat(PASSWORD_CHARS, RANDOM_PASSWORD_LENGTH)
+                .Select(s => s[_random.Next(s.Length)]).ToArray());
 
         #endregion
 
