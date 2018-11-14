@@ -21,15 +21,17 @@ namespace Synergy.Recruitment.Data.Common.Configurations.Identity
 
             builder.HasKey(p => p.Id);
 
-            builder.Property(x => x.FirstName).IsRequired().HasMaxLength(60);
-            builder.Property(x => x.LastName).IsRequired().HasMaxLength(60);
-            builder.Property(x => x.EmailAddress).IsRequired().HasMaxLength(60);
+            builder.Property(p => p.FirstName).IsRequired().HasMaxLength(60);
+            builder.Property(p => p.LastName).IsRequired().HasMaxLength(60);
+            builder.Property(p => p.EmailAddress).IsRequired().HasMaxLength(60);
+
+            builder.HasIndex(p => p.EmailAddress).IsUnique();
 
             // 1:1 relation Person - SystemUser
-            builder
-                .HasOne(p => p.SystemUser)
-                .WithOne(su => su.Person)
-                .HasForeignKey<Person>(p => p.SystemUserId);
+            //builder
+            //    .HasOne(p => p.SystemUser)
+            //    .WithOne(su => su.Person)
+            //    .HasForeignKey<Person>(p => p.SystemUserId);
         }
     }
 }

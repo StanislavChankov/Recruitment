@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Linq.Expressions;
 using System.Numerics;
 using System.Threading.Tasks;
 
@@ -10,6 +10,7 @@ using Synergy.Recruitment.Business.Factories;
 using Synergy.Recruitment.Core.Extensions;
 using Synergy.Recruitment.Core.Repositories.Identity;
 using Synergy.Recruitment.Core.Services.Identity;
+using Synergy.Recruitment.Data.Models.Identity;
 using Synergy.Recruitment.Resources;
 
 namespace Synergy.Recruitment.Business.Services.Identity
@@ -35,11 +36,11 @@ namespace Synergy.Recruitment.Business.Services.Identity
                 {
                     entry.SlidingExpiration = TimeSpan.FromMinutes(10);
 
-                    var actions = await _userRepository.GetActionsAsync(userId, UserFactory.GetActions);
+                    Expression<Func<SystemUser, bool>> selectionExp = UserFactory.GetUserById(userId, default(bool?));
 
-                    IEnumerable<short> flattedActions = actions.SelectMany(a => a);
+                    IEnumerable<short> actions = await _userRepository.GetActionsAsync(selectionExp);
 
-                    return flattedActions.CalculateActionsInteger();
+                    return actions.CalculateActionsInteger();
                 });
     }
 }

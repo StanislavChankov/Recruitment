@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -11,6 +10,7 @@ using Synergy.Recruitment.Business.Services.Identity;
 using Synergy.Recruitment.Core.Repositories.Identity;
 using Synergy.Recruitment.Core.Services;
 using Synergy.Recruitment.Core.Services.Identity;
+using Synergy.Recruitment.Core.Services.Master;
 using Synergy.Recruitment.Data.Models.Identity;
 using Synergy.Recruitment.Test.Mocks;
 
@@ -20,17 +20,34 @@ namespace Synergy.Recruitment.Test.Services
     [TestCategory("User")]
     public class UserServiceTests
     {
-        private ISecurityService _securityService;
         private IUserRepository _userRepository;
+        private ISecurityService _securityService;
         private IUserService _userService;
-
+        private IRoleActionOrganizationRepository _roleActionOrganizationRepository;
+        private IUserPasswordRepository _userPasswordRepository;
+        private IUserRoleService _userRoleService;
+        private IUserOrganizationService _userOrganizationService;
+        private IRoleActionMasterService _roleActionMasterService;
+        
         [TestInitialize]
         public void TestInitialize()
         {
             _userRepository = Substitute.For<IUserRepository>();
             _securityService = Substitute.For<ISecurityService>();
+            _roleActionOrganizationRepository = Substitute.For<IRoleActionOrganizationRepository>();
+            _userPasswordRepository = Substitute.For<IUserPasswordRepository>();
+            _roleActionMasterService = Substitute.For<IRoleActionMasterService>();
+            _userOrganizationService = Substitute.For<IUserOrganizationService>();
+            _userRoleService = Substitute.For<IUserRoleService>();
 
-            _userService = new UserService(_securityService, _userRepository);
+            _userService = new UserService(
+                _securityService,
+                _userRoleService,
+                _userOrganizationService,
+                _roleActionMasterService,
+                _userRepository,
+                _userPasswordRepository,
+                _roleActionOrganizationRepository);
         }
 
         [TestMethod]

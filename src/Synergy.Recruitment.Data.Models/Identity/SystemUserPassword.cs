@@ -1,9 +1,9 @@
-﻿namespace Synergy.Recruitment.Data.Models.Identity
-{
-    public class SystemUserPassword
-    {
-        public long Id { get; set; }
+﻿using Synergy.Recruitment.Data.Models.Abstract;
 
+namespace Synergy.Recruitment.Data.Models.Identity
+{
+    public class SystemUserPassword : BaseEntity
+    {
         public long SystemUserId { get; set; }
 
         public string Password { get; set; }

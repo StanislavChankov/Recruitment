@@ -11,11 +11,11 @@ namespace Synergy.Recruitment.Core.Repositories.Identity
         /// <summary>
         /// Gets the <see cref="TEntityResult"/> by user identifier asynchronously.
         /// </summary>
-        /// <typeparam name="TEntityResult">The type of the entity result.</typeparam>
+        /// <typeparam name="TResult">The type of the entity result.</typeparam>
         /// <param name="selectExpr">The select expr.</param>
         /// <param name="projectionExpr">The projection expr.</param>
-        Task<TEntityResult> GetByUserIdAsync<TEntityResult>(
+        Task<TResult> GetByUserIdAsync<TResult>(
             Expression<Func<Person, bool>> selectExpr,
-            Expression<Func<Person, TEntityResult>> projectionExpr);
+            Expression<Func<Person, TResult>> projectionExpr);
     }
 }

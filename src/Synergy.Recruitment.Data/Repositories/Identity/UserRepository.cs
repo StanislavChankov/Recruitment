@@ -36,12 +36,13 @@ namespace Synergy.Recruitment.Data.Repositories.Identity
                     .Select(projectionExp)
                     .FirstOrDefaultAsync();
 
-        public Task<List<IEnumerable<short>>> GetActionsAsync(
-            long userId,
-            Expression<Func<SystemUser, IEnumerable<short>>> projectionExp)
+        public Task<List<short>> GetActionsAsync(Expression<Func<SystemUser, bool>> selectionExp)
             => Queryable
-                .Where(x => x.Id == userId)
-                .Select(projectionExp)
+                .Where(selectionExp)
+                .SelectMany(su => su.Role.RoleActionOrganizations)
+                .Select(rao => rao.Action.ActionEnum)
                 .ToListAsync();
+
+        public Task InsertAsync(SystemUser user) => AddAsync(user);
     }
 }

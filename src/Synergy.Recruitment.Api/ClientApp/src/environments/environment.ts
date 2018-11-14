@@ -23,7 +23,7 @@ export const apiUrls = {
   identity: {
     token: environment.baseUrl + '/connect/token',
     userInfo: environment.baseUrl + '/connect/userinfo',
-    register: environment.baseUrl + '/account/register',
+    register: environment.baseUrl + '/api/account/register',
     actions: environment.baseUrl + '/api/users/{0}/action',
   },
 };

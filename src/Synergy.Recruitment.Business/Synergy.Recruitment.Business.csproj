@@ -10,6 +10,5 @@
   
   <ItemGroup Label="Project References">
     <ProjectReference Include="..\Synergy.Recruitment.Core\Synergy.Recruitment.Core.csproj" />
-    <ProjectReference Include="..\Synergy.Recruitment.Rest.Models\Synergy.Recruitment.Rest.Models.csproj" />
   </ItemGroup>
 </Project>

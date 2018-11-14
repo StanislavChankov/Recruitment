@@ -21,6 +21,8 @@ namespace Synergy.Recruitment.Data.Common.Configurations.Identity
 
             builder.HasKey(o => o.Id);
 
+            builder.HasIndex(o => o.Name).IsUnique();
+
             // Optional
             builder
                 .HasMany(o => o.RoleActionOrganizations)
