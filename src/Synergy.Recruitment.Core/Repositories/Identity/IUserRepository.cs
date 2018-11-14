@@ -21,11 +21,8 @@ namespace Synergy.Recruitment.Core.Repositories.Identity
         /// <summary>
         /// Gets the user actions asynchronously.
         /// </summary>
-        /// <param name="userId">The user identifier.</param>
-        /// <param name="projectionExp">The projection exp.</param>
-        Task<List<IEnumerable<short>>> GetActionsAsync(
-            long userId,
-            Expression<Func<SystemUser, IEnumerable<short>>> projectionExp);
+        /// <param name="selectionExp">The selection expression.</param>
+        Task<List<short>> GetActionsAsync(Expression<Func<SystemUser, bool>> selectionExp);
 
         /// <summary>
         /// Inserts the <see cref="SystemUser"/> asynchronously.

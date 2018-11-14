@@ -40,6 +40,11 @@ namespace Synergy.Recruitment.Business.Factories
                 => user.Person.EmailAddress == emailAddress
                     && Factory.ProjectIsActive(user.Person.IsActive, isActive);
 
+        public static Expression<Func<SystemUser, bool>> GetUserById(long id, bool? isActive)
+            => user
+                => user.Id == id
+                    && Factory.ProjectIsActive(user.Person.IsActive, isActive);
+
         public static SystemUserPassword GetUserPassword(
             UserOrganizationInsertRequest userOrg,
             long roleId,

@@ -29,7 +29,7 @@ export class RegisterComponent {
       this.validation = this.authOptions.forms.validation;
   }
 
-  private registerHandler(): void {
+  public registerHandler(): void {
     this.errors = this.messages = [];
     this.submitted = true;
 
@@ -44,7 +44,7 @@ export class RegisterComponent {
         });
   }
 
-  private getConfigValue(key: string): any {
+  public getConfigValue(key: string): any {
     return getDeepFromObject(this.authOptions, key, null);
   }
 }
